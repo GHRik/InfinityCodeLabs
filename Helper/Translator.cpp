@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 
-Translator::Translator( const iLogger &a_roLogger ) : m_roLogger( a_roLogger )
+helper::Translator::Translator( const iLogger &a_roLogger ) : m_roLogger( a_roLogger )
 {
 
 }
 
-std::vector<utils::CommandStandardize> Translator::translateCommand
+std::vector<utils::CommandStandardize> helper::Translator::translateCommand
                                        ( const std::vector<std::vector<std::string>> &a_rastrComandsSplitByWord)
 {
     utils::CommandStandardize oCommand = {};
@@ -278,7 +278,7 @@ std::vector<utils::CommandStandardize> Translator::translateCommand
 
 }
 
-utils::dbCommand Translator::checkFirstWord( const std::string &a_rstrWord ) const
+utils::dbCommand helper::Translator::checkFirstWord( const std::string &a_rstrWord ) const
 {
     utils::dbCommand oDbCommand = utils::dbCommand::UNDEFINED;
 
@@ -310,7 +310,7 @@ utils::dbCommand Translator::checkFirstWord( const std::string &a_rstrWord ) con
     return oDbCommand;
 }
 
-std::vector<std::string> Translator::makeParamInsert( const std::string &a_rstrWord ) const
+std::vector<std::string> helper::Translator::makeParamInsert( const std::string &a_rstrWord ) const
 {
     std::string param = "";
     std::vector<std::string> vectorOfParam;
@@ -351,7 +351,7 @@ std::vector<std::string> Translator::makeParamInsert( const std::string &a_rstrW
     return vectorOfParam;
 }
 
-std::string Translator::makeParamWhere( const std::string &a_rstrWord ) const
+std::string helper::Translator::makeParamWhere( const std::string &a_rstrWord ) const
 {
     std::string column = "";
     std::string value = "";
@@ -405,7 +405,7 @@ std::string Translator::makeParamWhere( const std::string &a_rstrWord ) const
 
 
 
-std::vector<std::string> Translator::makeParamCreate( const std::string &a_rstrWord) const
+std::vector<std::string> helper::Translator::makeParamCreate( const std::string &a_rstrWord) const
 {
     std::string param = "";
     std::vector<std::string> vectorOfParam;
