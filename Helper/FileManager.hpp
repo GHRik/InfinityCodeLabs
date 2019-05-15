@@ -11,7 +11,7 @@ namespace helper
     class FileManager : public iFileManager
     {
     public:
-        FileManager( iLogger *a_poLogger );
+        FileManager( const iLogger &a_roLogger );
         ~FileManager();
         utils::ErrorsCode openFile( const std::string a_strFileName );
         utils::ErrorsCode closeFile();
@@ -20,8 +20,11 @@ namespace helper
         utils::ErrorsCode clearFile();
         utils::ErrorsCode printFile( const std::string a_strFileName );
     private:
-        iLogger *m_poLogger;
+        const iLogger &m_roLogger;
         std::string *m_strOpenFileName;
+        FileManager();
+        FileManager( const FileManager& );
+        FileManager& operator=( const FileManager& a_oFileManager );
 
 
         // iFileManager interface

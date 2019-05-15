@@ -11,33 +11,23 @@ helper::Logger::~Logger()
 }
 
 
-helper::Logger &helper::Logger::getInstance()
+const helper::Logger &helper::Logger::getInstance()
 {
     static helper::Logger oInstance;
     return oInstance;
 }
 
-utils::ErrorsCode helper::Logger::logError( std::string a_pcErrorMessage )
+void helper::Logger::logError( const std::string a_rstrErrorMessage ) const
 {
-    utils::ErrorsCode oError = utils::ErrorsCode::LOGGER_PROBLEM;
-        oError = utils::ErrorsCode::OK;
-        std::cout <<"ERROR: " << a_pcErrorMessage << std::endl;
-
-    return oError;
+    std::cout <<"ERROR: " << a_rstrErrorMessage << std::endl;
 }
 
-utils::ErrorsCode helper::Logger::logWarrning(std::string a_pcWarrningMessage)
+void helper::Logger::logWarrning( const std::string a_strWarrningMessage ) const
 {
-    utils::ErrorsCode oError = utils::ErrorsCode::LOGGER_PROBLEM;
-        oError = utils::ErrorsCode::OK;
-        std::cout <<"WARRNING: " << a_pcWarrningMessage << std::endl;
-    return oError;
+    std::cout <<"WARRNING: " << a_strWarrningMessage << std::endl;
 }
 
-utils::ErrorsCode helper::Logger::logInfo( std::string a_pcInfoMessage )
+void helper::Logger::logInfo( const std::string a_strInfoMessage ) const
 {
-    utils::ErrorsCode oError = utils::ErrorsCode::LOGGER_PROBLEM;
-        oError = utils::ErrorsCode::OK;
-        std::cout <<"INFO: " << a_pcInfoMessage << std::endl;
-    return oError;
+    std::cout <<"INFO: " << a_strInfoMessage << std::endl;
 }

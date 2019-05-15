@@ -10,82 +10,78 @@ helper::Splitter::~Splitter()
 
 }
 
-std::vector<std::string> helper::Splitter::splitCommand(std::string &str)
+std::vector<std::string> helper::Splitter::splitCommand( std::string &a_rstrCommand ) const
 {
-    std::vector<std::string> test;
-    std::string sequence = "";
-    while( ' ' == *(str.begin()) )
+    std::vector<std::string> aResult;
+    std::string strSequence = "";
+    while( ' ' == *( a_rstrCommand.begin() ) )
     {
-        str = str.substr(1, str.size());
+        a_rstrCommand = a_rstrCommand.substr( 1, a_rstrCommand.size() );
     }
 
-    while( ' ' == *(str.rbegin()) )
+    while( ' ' == *( a_rstrCommand.rbegin() ) )
     {
-        str = str.substr(0, str.size()-1);
+        a_rstrCommand = a_rstrCommand.substr( 0, a_rstrCommand.size()-1 );
     }
-    //std::cout << str << std::endl;
 
-    for( uint16_t iter = 0; iter < str.length(); ++iter)
+    for( uint16_t iter = 0; iter < a_rstrCommand.length(); ++iter)
     {
 
-        sequence += str.at(iter);
-        if( ';' == str.at(iter) )
+        strSequence += a_rstrCommand.at(iter);
+        if( ';' == a_rstrCommand.at(iter) )
         {
-            test.push_back(sequence);
-            sequence = "";
+            aResult.push_back( strSequence );
+            strSequence = "";
         }
     }
-    for( uint16_t i = 0; i < test.size(); ++i)
+    if( strSequence.length() > 0 )
     {
-        //std::cout << test.at(i) << std::endl;
-    }
-    if( sequence.length() > 0 )
-    {
-        test.push_back("ERROR");
+        aResult.push_back("ERROR");
     }
 
-    return test;
+    return aResult;
 }
 
-std::vector<std::vector<std::string> > helper::Splitter::splitCommandByWord(std::vector<std::string> &sequence)
+std::vector<std::vector<std::string> > helper::Splitter::splitCommandByWord
+                                                         ( const std::vector<std::string> &a_rstrCommandSequence ) const
 {
-    std::vector<std::string> words;
-    std::vector<std::vector<std::string>> separeting;
-    std::string word = "";
+    std::vector<std::string> strSeparateWords;
+    std::vector<std::vector<std::string>> astrResult;
+    std::string strTempWord = "";
     bool quoteState = false;
-    for( size_t i = 0; i < sequence.size(); ++i)
+    for( size_t u16IterAllSequence = 0; u16IterAllSequence < a_rstrCommandSequence.size(); ++u16IterAllSequence)
     {
-        for( size_t iter = 0; iter < sequence.at(i).length(); ++iter )
+        for( uint16_t u16Iter = 0; u16Iter < a_rstrCommandSequence.at( u16IterAllSequence ).length(); ++u16Iter )
         {
 
-            if( sequence.at(i).at(iter) == '"' )
+            if( a_rstrCommandSequence.at( u16IterAllSequence ).at( u16Iter ) == '"' )
             {
                 quoteState = !quoteState;
             }
-            if( sequence.at(i).at(iter) == ' ' && false == quoteState )
+            if( a_rstrCommandSequence.at( u16IterAllSequence ).at( u16Iter ) == ' ' && false == quoteState )
             {
-                if( word.length() > 0 )
+                if( 0 < strTempWord.length() )
                 {
-                    words.push_back(word);
+                    strSeparateWords.push_back( strTempWord );
                 }
-                word = "";
+                strTempWord = "";
             }
             else
             {
-                word += sequence.at(i).at(iter);
+                strTempWord += a_rstrCommandSequence.at( u16IterAllSequence ).at( u16Iter );
             }
 
         }
-        if( word.length() > 0 )
+        if( 0 < strTempWord.length() )
         {
-            words.push_back(word);
-            word = "";
+            strSeparateWords.push_back( strTempWord );
+            strTempWord = "";
         }
 
-        separeting.push_back(words);
-        words.clear();
+        astrResult.push_back( strSeparateWords );
+        strSeparateWords.clear();
 
     }
 
-    return separeting;
+    return astrResult;
 }

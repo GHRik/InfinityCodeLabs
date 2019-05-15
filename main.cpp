@@ -13,10 +13,10 @@ using namespace std;
 int main()
 {
 
-    helper::Validator oValidator( &helper::Logger::getInstance() );
-    helper::FileManager oFileManager( &helper::Logger::getInstance() );
+    helper::Validator oValidator( helper::Logger::getInstance() );
+    helper::FileManager oFileManager( helper::Logger::getInstance() );
     helper::Splitter oSplitter;
     Translator oTranslator( helper::Logger::getInstance() );
-    DatabaseManager dbManager( &helper::Logger::getInstance(), &oValidator, &oFileManager, &oSplitter, &oTranslator );
+    DatabaseManager dbManager( helper::Logger::getInstance(), oValidator, oFileManager, oSplitter, oTranslator );
     dbManager.run();
 }

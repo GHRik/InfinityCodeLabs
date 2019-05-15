@@ -8,13 +8,15 @@ namespace helper
     class Logger : public iLogger
     {
     public:
-        static Logger &getInstance();
-        utils::ErrorsCode logError( std::string a_pcErrorMessage );
-        utils::ErrorsCode logWarrning( std::string a_pcWarrningMessage );
-        utils::ErrorsCode logInfo( std::string a_pcInfoMessage );
+        static Logger const &getInstance();
+        void logError( const std::string a_rstrErrorMessage ) const;
+        void logWarrning( const std::string a_strWarrningMessage ) const;
+        void logInfo( const std::string a_strInfoMessage ) const;
     private:
         Logger();
         virtual ~Logger();
+        Logger( const Logger& );
+        Logger& operator=( const Logger& a_oLogger );
 
 
     };

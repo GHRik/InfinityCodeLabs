@@ -4,250 +4,253 @@
 #include <string>
 #include <vector>
 
-Translator::Translator(iLogger &a_roLogger ) : m_roLogger( a_roLogger )
+Translator::Translator( const iLogger &a_roLogger ) : m_roLogger( a_roLogger )
 {
 
 }
 
-std::vector<utils::CommandStandardize> Translator::translateCommand(std::vector<std::vector<std::string>> comandsSplitByWord)
+std::vector<utils::CommandStandardize> Translator::translateCommand
+                                       ( const std::vector<std::vector<std::string>> &a_rastrComandsSplitByWord)
 {
-    utils::CommandStandardize oCommand;
-    std::vector<utils::CommandStandardize> vectorWithCommand;
-    utils::dbCommand command;
-    std::string tableName = "";
-    std::vector<std::string> param = {};
+    utils::CommandStandardize oCommand = {};
+    std::vector<utils::CommandStandardize> aoStandarizeCommand;
+    utils::dbCommand oDbCommand = utils::dbCommand::UNDEFINED;
+    std::string strTableName = "";
+    std::vector<std::string> astrCommandParam = {};
 
-    for( uint16_t iter = 0; iter < comandsSplitByWord.size(); ++iter )
+    for( uint16_t u16Iter = 0; u16Iter < a_rastrComandsSplitByWord.size(); ++u16Iter )
     {
         //std::cout << iter;
-        param.clear();
-        tableName = "";
-        command = checkFirstWord(comandsSplitByWord.at(iter).at(0));
-        std::string word = "";
-        switch( command )
+        astrCommandParam.clear();
+        strTableName = "";
+        oDbCommand = checkFirstWord(a_rastrComandsSplitByWord.at(u16Iter).at(0));
+        std::string strTempWord = "";
+        switch( oDbCommand )
         {
             case utils::dbCommand::CREATE:
-                if( 2 > (comandsSplitByWord.at(iter).size()-1) )
+                if( 2 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                 {
-                    param.push_back("ERROR");
+                    astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Undefined table name");
                     continue;
                 }
                 else
                 {
-                    tableName = comandsSplitByWord.at(iter).at(1);
+                    strTableName = a_rastrComandsSplitByWord.at(u16Iter).at(1);
                 }
-                for( size_t i = 2; i < comandsSplitByWord.at(iter).size(); ++i )
+                for( size_t i = 2; i < a_rastrComandsSplitByWord.at(u16Iter).size(); ++i )
                 {
-                    word += comandsSplitByWord.at(iter).at(i);
+                    strTempWord += a_rastrComandsSplitByWord.at(u16Iter).at(i);
 
                 }
-                word = word.substr(word.find_first_of('(')+1,word.find_last_of(')')-1);
-                std::cout << word << std::endl;
-                param = makeParamCreate(word);
-
+                strTempWord = strTempWord.substr(strTempWord.find_first_of('(')+1,strTempWord.find_last_of(')')-1);
+                std::cout << strTempWord << std::endl;
+                astrCommandParam = makeParamCreate(strTempWord);
             break;
 
             case utils::dbCommand::INSERT_INTO:
-                if( 2 > (comandsSplitByWord.at(iter).size()-1) )
+                if( 2 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                 {
-                    param.push_back("ERROR");
+                    astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Expected INTO");
                     continue;
                 }
-                else if( "INTO" == comandsSplitByWord.at(iter).at(1) )
+                else if( "INTO" == a_rastrComandsSplitByWord.at(u16Iter).at(1) )
                 {
-                    if( 3 > (comandsSplitByWord.at(iter).size()-1) )
+                    if( 3 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                     {
-                        param.push_back("ERROR");
+                        astrCommandParam.push_back("ERROR");
                         m_roLogger.logError("Undefined table name");
                         continue;
                     }
                     else
                     {
-                        tableName = comandsSplitByWord.at(iter).at(2);
+                        strTableName = a_rastrComandsSplitByWord.at(u16Iter).at(2);
                     }
-                    for( size_t i = 2; i < comandsSplitByWord.at(iter).size(); ++i )
+                    for( size_t i = 2; i < a_rastrComandsSplitByWord.at(u16Iter).size(); ++i )
                     {
-                        word += comandsSplitByWord.at(iter).at(i);
+                        strTempWord += a_rastrComandsSplitByWord.at(u16Iter).at(i);
 
                     }
-                    word = word.substr(word.find_first_of("(")+1,word.find_last_of(")")-1);
-                    if( word.back() == ';' )
+                    strTempWord = strTempWord.substr(strTempWord.find_first_of("(")+1,strTempWord.find_last_of(")")-1);
+                    if( strTempWord.back() == ';' )
                     {
-                        word = word.substr(0,word.length()-1);
+                        strTempWord = strTempWord.substr(0,strTempWord.length()-1);
                     }
-                    if( word.back() == ')' )
+                    if( strTempWord.back() == ')' )
                     {
-                        word = word.substr(0,word.length()-1);
+                        strTempWord = strTempWord.substr(0,strTempWord.length()-1);
                     }
 
-                    std::cout << word << std::endl;
-                    param = makeParamInsert(word);
+                    std::cout << strTempWord << std::endl;
+                    astrCommandParam = makeParamInsert(strTempWord);
 
                 }
                 else
                 {
-                    param.push_back("ERROR");
+                    astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Expected INTO");
                 }
             break;
 
             case utils::dbCommand::DROP:
 
-                if( 1 > (comandsSplitByWord.at(iter).size()-1) )
+                if( 1 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                 {
-                    param.push_back("ERROR");
+                    astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Undefined table name");
                     continue;
                 }
                 else
                 {
-                    tableName = comandsSplitByWord.at(iter).at(1);
+                    strTableName = a_rastrComandsSplitByWord.at(u16Iter).at(1);
                 }
-                if( tableName.back() == ';' )
+                if( strTableName.back() == ';' )
                 {
-                    tableName = tableName.substr(0,tableName.length()-1);
+                    strTableName = strTableName.substr(0,strTableName.length()-1);
                 }
-                if( tableName.size() == 0 )
+                if( strTableName.size() == 0 )
                 {
-                    param.push_back("ERROR");
+                    astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Undefined table name");
                 }
 
             break;
 
             case utils::dbCommand::DELETE_FROM:
-                if( 1 > (comandsSplitByWord.at(iter).size()-1) )
+                if( 1 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                 {
-                    param.push_back("ERROR");
+                    astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Expected FROM");
                     continue;
                 }
-                else if( "FROM" == comandsSplitByWord.at(iter).at(1) )
+                else if( "FROM" == a_rastrComandsSplitByWord.at(u16Iter).at(1) )
                 {
-                    if( 2 > (comandsSplitByWord.at(iter).size()-1) )
+                    if( 2 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                     {
-                        param.push_back("ERROR");
+                        astrCommandParam.push_back("ERROR");
                         m_roLogger.logError("Undefined table name");
                         continue;
                     }
                     else
                     {
-                        tableName = comandsSplitByWord.at(iter).at(2);
+                        strTableName = a_rastrComandsSplitByWord.at(u16Iter).at(2);
                     }
 
-                    if( tableName.back() == ';' )
+                    if( strTableName.back() == ';' )
                     {
-                        tableName = tableName.substr(0,tableName.length()-1);
+                        strTableName = strTableName.substr(0,strTableName.length()-1);
                     }
-                    if( tableName.size() == 0 )
+                    if( strTableName.size() == 0 )
                     {
-                        param.push_back("ERROR");
+                        astrCommandParam.push_back("ERROR");
                         m_roLogger.logError("Expected table name");
                         continue;
                     }
 
-                    if( 3 < (comandsSplitByWord.at(iter).size()-1) )
+                    if( 3 < (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                     {
-                        if( "WHERE" == comandsSplitByWord.at(iter).at(3) )
+                        if( "WHERE" == a_rastrComandsSplitByWord.at(u16Iter).at(3) )
                         {
-                            word = "";
-                            for(size_t i = 3; i < comandsSplitByWord.at(iter).size(); ++i)
+                            strTempWord = "";
+                            for(size_t i = 3; i < a_rastrComandsSplitByWord.at(u16Iter).size(); ++i)
                             {
-                                word += comandsSplitByWord.at(iter).at(i);
+                                strTempWord += a_rastrComandsSplitByWord.at(u16Iter).at(i);
                             }
-                            word = makeParamWhere(word);
-                            param.push_back(word);
+                            strTempWord = makeParamWhere(strTempWord);
+                            astrCommandParam.push_back(strTempWord);
                         }
                         else
                         {
-                            param.push_back("ERROR");
+                            astrCommandParam.push_back("ERROR");
                             m_roLogger.logError("Expection WHERE");
                         }
                     }
-
-
-
-
                 }
 
             break;
 
             case utils::dbCommand::SELECT:
-                if( 2 > (comandsSplitByWord.at(iter).size()-1) )
+                if( 2 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                 {
-                    param.push_back("ERROR");
+                    astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Undefined column name");
                     continue;
                 }
 
-                if( comandsSplitByWord.at(iter).end() != std::find( comandsSplitByWord.at(iter).begin(), comandsSplitByWord.at(iter).end(), "FROM" ))
+                if( a_rastrComandsSplitByWord.at(u16Iter).end() != std::find
+                                                                   ( a_rastrComandsSplitByWord.at(u16Iter).begin(),
+                                                                     a_rastrComandsSplitByWord.at(u16Iter).end(),
+                                                                     "FROM"
+                                                                    ))
                 {
-                    for(size_t i = 1; i < comandsSplitByWord.at(iter).size(); ++i)
+                    for( uint16_t u16IterByWord = 1;
+                                                u16IterByWord < a_rastrComandsSplitByWord.at(u16Iter).size();
+                                                ++u16IterByWord
+                                                )
                     {
-                        if( "FROM" == comandsSplitByWord.at(iter).at(i) )
+                        if( "FROM" == a_rastrComandsSplitByWord.at(u16Iter).at(u16IterByWord) )
                         {
                             break;
                         }
-                        word += comandsSplitByWord.at(iter).at(i);
+                        strTempWord += a_rastrComandsSplitByWord.at(u16Iter).at(u16IterByWord);
                     }
-                    param.push_back(word);
+                    astrCommandParam.push_back(strTempWord);
 
-                    for(size_t i = 0; i < comandsSplitByWord.at(iter).size(); ++i)
+                    for(size_t i = 0; i < a_rastrComandsSplitByWord.at(u16Iter).size(); ++i)
                     {
-                        if( "FROM" != comandsSplitByWord.at(iter).at(i) )
+                        if( "FROM" != a_rastrComandsSplitByWord.at(u16Iter).at(i) )
                         {
                             continue;
 
                         }
-                        tableName += comandsSplitByWord.at(iter).at(++i);
+                        strTableName += a_rastrComandsSplitByWord.at(u16Iter).at(++i);
                         break;
 
                     }
-                    tableName = tableName.substr(0,tableName.size());
-                    if( tableName.back() == ';' )
+                    strTableName = strTableName.substr(0,strTableName.size());
+                    if( strTableName.back() == ';' )
                     {
-                        tableName = tableName.substr(0,tableName.length()-1);
+                        strTableName = strTableName.substr(0,strTableName.length()-1);
                     }
-                    if( tableName.size() == 0 || tableName == ";" )
+                    if( strTableName.size() == 0 || strTableName == ";" )
                     {
-                        param.push_back("ERROR");
+                        astrCommandParam.push_back("ERROR");
                         m_roLogger.logError("Expection table name");
                         continue;
                     }
                     else
                     {
-                        word = "";
+                        strTempWord = "";
                         bool isWhere = false;
-                        for(size_t i = 0; i < comandsSplitByWord.at(iter).size(); ++i)
+                        for(size_t i = 0; i < a_rastrComandsSplitByWord.at(u16Iter).size(); ++i)
                         {
                             if( true == isWhere  )
                             {
-                                word += comandsSplitByWord.at(iter).at(i);
+                                strTempWord += a_rastrComandsSplitByWord.at(u16Iter).at(i);
                             }
-                            if( tableName == comandsSplitByWord.at(iter).at(i) )
+                            if( strTableName == a_rastrComandsSplitByWord.at(u16Iter).at(i) )
                             {
                                 isWhere = true;
                             }
 
                         }
-                        if( word.size() > 0 && word != ";" )
+                        if( strTempWord.size() > 0 && strTempWord != ";" )
                         {
-                            if( std::string::npos != word.find("WHERE") )
+                            if( std::string::npos != strTempWord.find("WHERE") )
                             {
                                std::string wordWithWhere = "";
 
-                               for( size_t i = word.find("WHERE")+5; i < tableName.size(); ++i )
+                               for( size_t i = strTempWord.find("WHERE")+5; i < strTableName.size(); ++i )
                                {
-                                   wordWithWhere += tableName.at(i);
+                                   wordWithWhere += strTableName.at(i);
                                }
-                               wordWithWhere = makeParamWhere(word);
-                               param.push_back(wordWithWhere);
+                               wordWithWhere = makeParamWhere(strTempWord);
+                               astrCommandParam.push_back(wordWithWhere);
                             }
                             else
                             {
-                                param.push_back("ERROR");
+                                astrCommandParam.push_back("ERROR");
                                 m_roLogger.logError("Expected WHERE");
                             }
                         }
@@ -256,7 +259,7 @@ std::vector<utils::CommandStandardize> Translator::translateCommand(std::vector<
                 }
                 else
                 {
-                  param.push_back("ERROR");
+                  astrCommandParam.push_back("ERROR");
                   m_roLogger.logError("Expection FROM");
                 }
             break;
@@ -265,60 +268,60 @@ std::vector<utils::CommandStandardize> Translator::translateCommand(std::vector<
             break;
 
         }
-        oCommand.command = command;
-        oCommand.tableName = tableName;
-        oCommand.params = param;
+        oCommand.command = oDbCommand;
+        oCommand.tableName = strTableName;
+        oCommand.params = astrCommandParam;
 
-        vectorWithCommand.push_back(oCommand);
+        aoStandarizeCommand.push_back(oCommand);
     }
-    return vectorWithCommand;
+    return aoStandarizeCommand;
 
 }
 
-utils::dbCommand Translator::checkFirstWord(std::string word)
+utils::dbCommand Translator::checkFirstWord( const std::string &a_rstrWord ) const
 {
-    utils::dbCommand command = utils::dbCommand::UNDEFINED;
+    utils::dbCommand oDbCommand = utils::dbCommand::UNDEFINED;
 
-    if( "CREATE" == word )
+    if( "CREATE" == a_rstrWord )
     {
-        command = utils::dbCommand::CREATE;
+        oDbCommand = utils::dbCommand::CREATE;
     }
-    else if( "INSERT" == word )
+    else if( "INSERT" == a_rstrWord )
     {
-        command = utils::dbCommand::INSERT_INTO;
+        oDbCommand = utils::dbCommand::INSERT_INTO;
     }
-    else if( "DROP" == word )
+    else if( "DROP" == a_rstrWord )
     {
-        command = utils::dbCommand::DROP;
+        oDbCommand = utils::dbCommand::DROP;
     }
-    else if( "SELECT" == word )
+    else if( "SELECT" == a_rstrWord )
     {
-        command = utils::dbCommand::SELECT;
+        oDbCommand = utils::dbCommand::SELECT;
     }
-    else if( "DELETE" == word )
+    else if( "DELETE" == a_rstrWord )
     {
-        command = utils::dbCommand::DELETE_FROM;
+        oDbCommand = utils::dbCommand::DELETE_FROM;
     }
     else
     {
-        command = utils::dbCommand::UNDEFINED;
+        oDbCommand = utils::dbCommand::UNDEFINED;
     }
 
-    return command;
+    return oDbCommand;
 }
 
-std::vector<std::string> Translator::makeParamInsert(std::string word)
+std::vector<std::string> Translator::makeParamInsert( const std::string &a_rstrWord ) const
 {
     std::string param = "";
     std::vector<std::string> vectorOfParam;
     bool isQuoted = false;
-    for( size_t i = 0; i < word.length(); ++i )
+    for( size_t i = 0; i < a_rstrWord.length(); ++i )
     {
-        if( '"' == word.at(i) )
+        if( '"' == a_rstrWord.at(i) )
         {
             isQuoted = !isQuoted;
         }
-        if( ',' == word.at(i) && false == isQuoted )
+        if( ',' == a_rstrWord.at(i) && false == isQuoted )
         {
             if( param.length() == 0 )
             {
@@ -333,7 +336,7 @@ std::vector<std::string> Translator::makeParamInsert(std::string word)
         }
         else
         {
-            param += word.at(i);
+            param += a_rstrWord.at(i);
         }
     }
     if( param.length() == 0 )
@@ -348,18 +351,18 @@ std::vector<std::string> Translator::makeParamInsert(std::string word)
     return vectorOfParam;
 }
 
-std::string Translator::makeParamWhere(std::string word)
+std::string Translator::makeParamWhere( const std::string &a_rstrWord ) const
 {
     std::string column = "";
     std::string value = "";
     std::string whereParam = "";
 
-    if( std::string::npos != word.find("=") )
+    if( std::string::npos != a_rstrWord.find("=") )
     {
         bool isColumn = true;
-        for( size_t iter = 0; iter < word.size(); ++iter )
+        for( size_t iter = 0; iter < a_rstrWord.size(); ++iter )
         {
-            if( '=' == word.at(iter) )
+            if( '=' == a_rstrWord.at(iter) )
             {
                 isColumn = false;
                 continue;
@@ -367,11 +370,11 @@ std::string Translator::makeParamWhere(std::string word)
             }
             if( true == isColumn )
             {
-                column += word.at(iter);
+                column += a_rstrWord.at(iter);
             }
             else
             {
-                value += word.at(iter);
+                value += a_rstrWord.at(iter);
             }
         }
         if( 0 == column.size() )
@@ -400,16 +403,18 @@ std::string Translator::makeParamWhere(std::string word)
 
 }
 
-std::vector<std::string> Translator::makeParamCreate(std::string word)
+
+
+std::vector<std::string> Translator::makeParamCreate( const std::string &a_rstrWord) const
 {
     std::string param = "";
     std::vector<std::string> vectorOfParam;
     bool isFieldName = true;
-    for( size_t i = 0; i < word.length(); ++i )
+    for( size_t i = 0; i < a_rstrWord.length(); ++i )
     {
         if( true == isFieldName )
         {
-            if( ':' == word.at(i) )
+            if( ':' == a_rstrWord.at(i) )
             {
                 if( param.length() == 0 )
                 {
@@ -425,12 +430,12 @@ std::vector<std::string> Translator::makeParamCreate(std::string word)
             }
             else
             {
-               param += word.at(i);
+               param += a_rstrWord.at(i);
             }
         }
         else
         {
-           if( ',' == word.at(i) )
+           if( ',' == a_rstrWord.at(i) )
            {
                if( param.length() == 0 )
                {
@@ -446,7 +451,7 @@ std::vector<std::string> Translator::makeParamCreate(std::string word)
            }
            else
            {
-               param += word.at(i);
+               param += a_rstrWord.at(i);
            }
         }
     }

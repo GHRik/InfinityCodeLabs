@@ -13,13 +13,16 @@ namespace helper
     class Validator : public iValidate
     {
     public:
-        Validator( iLogger *a_poLogger );
-        utils::ErrorsCode validateCommand( std::string a_strCommand );
-        void prepareToValidate(std::string a_strCommand);
-        bool isWithoutError( std::vector<std::string> a_astrCommands );
+        Validator( const iLogger &a_roLogger );
+        utils::ErrorsCode validateCommand( const std::string &a_rstrCommand ) const;
+        void prepareToValidate(std::string &a_rstrCommand);
+        bool isWithoutError( const std::vector<std::string> &a_rastrCommands ) const;
     private:
-        iLogger *m_poLogger;
-        void deleteRedundantSpace(std::string &str);
+        const iLogger &m_roLogger;
+        void deleteRedundantSpace(std::string &a_rstrWord);
+        Validator();
+        Validator( const Validator& );
+        Validator& operator=( const Validator& a_oValidate );
 
     };
 }

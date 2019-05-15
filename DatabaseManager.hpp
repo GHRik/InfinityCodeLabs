@@ -22,16 +22,27 @@ struct CommandQueue;
 class DatabaseManager
 {
 public:
-    DatabaseManager( iLogger *a_poLogger, iValidate *a_poValidate, iFileManager *a_poFileManager, iSplitter *a_poSplitter, iTranslator *a_poTranslator );
+    DatabaseManager
+    (
+      const iLogger &a_roLogger,
+      iValidate &a_roValidate,
+      iFileManager &a_roFileManager,
+      iSplitter &a_roSplitter,
+      iTranslator &a_roTranslator
+    );
     ~DatabaseManager();
-    void run();
+    void run() const;
 private:
-    utils::ErrorsCode callCommand(utils::CommandStandardize Queue  );
-    iLogger *m_poLogger;
-    iValidate *m_poValidate;
-    iFileManager *m_poFileManager;
-    iSplitter *m_poSplitter;
-    iTranslator *m_poTranslator;
+    const iLogger &m_roLogger;
+    iValidate &m_roValidate;
+    iFileManager &m_roFileManager;
+    iSplitter &m_roSplitter;
+    iTranslator &m_roTranslator;
+    void callCommand( const utils::CommandStandardize &a_roCommand  ) const;
+    DatabaseManager();
+    DatabaseManager( const DatabaseManager& );
+    DatabaseManager& operator=( const DatabaseManager& a_oDatabaseManager );
+
 };
 
 #endif // DATABASE_HPP

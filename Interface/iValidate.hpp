@@ -11,9 +11,9 @@ class iValidate
 {
 public:
     virtual ~iValidate();
-    virtual void prepareToValidate( std::string a_strCommand ) = 0;
-    virtual utils::ErrorsCode validateCommand( std::string a_strCommand ) = 0;
-    virtual bool isWithoutError( std::vector<std::string> a_astrCommands ) = 0;
+    virtual void prepareToValidate( std::string &a_rstrCommand ) = 0;
+    virtual utils::ErrorsCode validateCommand( const std::string &a_rstrCommand ) const = 0;
+    virtual bool isWithoutError( const std::vector<std::string> &a_arstrCommands ) const = 0;
 };
 
 #endif // IVALIDATE_HPP

@@ -1,12 +1,19 @@
 #include "DatabaseManager.hpp"
 
 
-DatabaseManager::DatabaseManager( iLogger *a_poLogger, iValidate *a_poValidate, iFileManager *a_poFileManager, iSplitter *a_poSplitter, iTranslator *a_poTranslator)
-    : m_poLogger( a_poLogger ),
-      m_poValidate( a_poValidate ),
-      m_poFileManager( a_poFileManager ),
-      m_poSplitter( a_poSplitter ),
-      m_poTranslator( a_poTranslator )
+DatabaseManager::DatabaseManager
+(
+  const iLogger &a_roLogger,
+  iValidate &a_roValidate,
+  iFileManager &a_roFileManager,
+  iSplitter &a_roSplitter,
+  iTranslator &a_roTranslator
+)
+    : m_roLogger( a_roLogger ),
+      m_roValidate( a_roValidate ),
+      m_roFileManager( a_roFileManager ),
+      m_roSplitter( a_roSplitter ),
+      m_roTranslator( a_roTranslator )
 {
 
 }
@@ -16,94 +23,89 @@ DatabaseManager::~DatabaseManager()
 
 }
 
-void DatabaseManager::run()
+void DatabaseManager::run() const
 {
 
-    std::string commandsOneLine = "CREATE table (price : Integer, Author: varchar(30)); INSERT INTO table (1, \"Ja\"); SELECT price FROM table WHERE Author=\"Ja\"; DELETE FROM table WHERE a=b; DROP table; ";
+    std::string commandsOneLine = "CREATE table (price : Integer, Author: varchar(30)); ";
     //getline( std::cin, commandsOneLine );
-    std::vector<std::vector<std::string>> comandInOneWord;
-    std::vector<std::string> commands;
-    if( nullptr != m_poSplitter )
+    std::vector<std::vector<std::string>> astrComandInOneWord;
+    std::vector<std::string> astrCommand;
+    astrCommand = m_roSplitter.splitCommand(commandsOneLine);
+    for( uint16_t u16Iter = 0; u16Iter < astrCommand.size(); ++u16Iter )
     {
-       commands = m_poSplitter->splitCommand(commandsOneLine);
-       if( nullptr != m_poValidate )
-       {
-           for( uint16_t iter = 0; iter < commands.size(); ++iter )
-           {
-                m_poValidate->prepareToValidate( commands.at(iter) );
-           }
-          for( uint16_t iter = 0; iter < commands.size(); ++iter)
-          {
-             std::cout << commands.at(iter) << std::endl;
-             if( utils::ErrorsCode::OK != m_poValidate->validateCommand(commands.at(iter)) )
-             {
-                 commands.erase(commands.begin()+iter);
-             }
-          }
-       }
-       comandInOneWord = m_poSplitter->splitCommandByWord(commands);
+        m_roValidate.prepareToValidate( astrCommand.at( u16Iter ) );
     }
-
-    std::vector<utils::CommandStandardize> Queue = m_poTranslator->translateCommand( comandInOneWord );
-
-    for( size_t iter = 0; iter < Queue.size(); ++iter )
+    for( uint16_t u16Iter = 0; u16Iter < astrCommand.size(); ++u16Iter )
     {
-        callCommand( Queue.at(iter) );
+        std::cout << astrCommand.at( u16Iter ) << std::endl;
+        if( utils::ErrorsCode::OK != m_roValidate.validateCommand( astrCommand.at( u16Iter )) )
+        {
+            astrCommand.erase( astrCommand.begin() + u16Iter );
+        }
+    }
+    astrComandInOneWord = m_roSplitter.splitCommandByWord( astrCommand );
+
+    std::vector<utils::CommandStandardize> aoCommandStandard = m_roTranslator.translateCommand( astrComandInOneWord );
+
+    for( uint16_t u16Iter = 0; u16Iter < aoCommandStandard.size(); ++u16Iter )
+    {
+        callCommand( aoCommandStandard.at( u16Iter) );
     }
 }
 
-utils::ErrorsCode DatabaseManager::callCommand( utils::CommandStandardize Queue )
+void DatabaseManager::callCommand( const utils::CommandStandardize &a_roCommand ) const
 {
-    if( true == m_poValidate->isWithoutError( Queue.params ) )
-    {
 
-        switch( Queue.command )
+
+    if( true == m_roValidate.isWithoutError( a_roCommand.params ) )
+    {
+        switch( a_roCommand.command )
         {
             case utils::dbCommand::CREATE :
-                m_poLogger->logInfo("CREATE called");
-                m_poLogger->logInfo("TableName: ");
-                m_poLogger->logInfo(Queue.tableName);
-                m_poLogger->logInfo("Params: ");
-                for(size_t i = 0; i < Queue.params.size();++i)
+                m_roLogger.logInfo("CREATE called");
+                m_roLogger.logInfo("TableName: ");
+                m_roLogger.logInfo(a_roCommand.tableName);
+                m_roLogger.logInfo("Params: ");
+                for(size_t i = 0; i < a_roCommand.params.size();++i)
                 {
-                    m_poLogger->logInfo(Queue.params.at(i));
+                    m_roLogger.logInfo(a_roCommand.params.at(i));
                 }
             break;
             case utils::dbCommand::DELETE_FROM :
-                m_poLogger->logInfo("DELETE FROM called");
-                m_poLogger->logInfo("TableName: ");
-                m_poLogger->logInfo(Queue.tableName);
-                m_poLogger->logInfo("Params: ");
-                for(size_t i = 0; i < Queue.params.size();++i)
+                m_roLogger.logInfo("DELETE FROM called");
+                m_roLogger.logInfo("TableName: ");
+                m_roLogger.logInfo(a_roCommand.tableName);
+                m_roLogger.logInfo("Params: ");
+                for(size_t i = 0; i < a_roCommand.params.size();++i)
                 {
-                    m_poLogger->logInfo(Queue.params.at(i));
+                    m_roLogger.logInfo(a_roCommand.params.at(i));
                 }
             break;
             case utils::dbCommand::INSERT_INTO :
-                m_poLogger->logInfo("INSERT INTO called");
-                m_poLogger->logInfo("TableName: ");
-                m_poLogger->logInfo(Queue.tableName);
-                m_poLogger->logInfo("Params: ");
-                for(size_t i = 0; i < Queue.params.size();++i)
+                m_roLogger.logInfo("INSERT INTO called");
+                m_roLogger.logInfo("TableName: ");
+                m_roLogger.logInfo(a_roCommand.tableName);
+                m_roLogger.logInfo("Params: ");
+                for(size_t i = 0; i < a_roCommand.params.size();++i)
                 {
-                    m_poLogger->logInfo(Queue.params.at(i));
+                    m_roLogger.logInfo(a_roCommand.params.at(i));
                 }
             break;
             case utils::dbCommand::SELECT :
-                m_poLogger->logInfo("SELECT called");
-                m_poLogger->logInfo("TableName: ");
-                m_poLogger->logInfo(Queue.tableName);
-                m_poLogger->logInfo("Params: ");
-                for(size_t i = 0; i < Queue.params.size();++i)
+                m_roLogger.logInfo("SELECT called");
+                m_roLogger.logInfo("TableName: ");
+                m_roLogger.logInfo(a_roCommand.tableName);
+                m_roLogger.logInfo("Params: ");
+                for(size_t i = 0; i < a_roCommand.params.size();++i)
                 {
-                    m_poLogger->logInfo(Queue.params.at(i));
+                    m_roLogger.logInfo(a_roCommand.params.at(i));
                 }
             break;
             case utils::dbCommand::DROP :
-                m_poLogger->logInfo("DROP called");
+                m_roLogger.logInfo("DROP called");
             break;
             case utils::dbCommand::UNDEFINED :
-                m_poLogger->logError("Undefined command");
+                m_roLogger.logError("Undefined command");
             break;
         }
     }

@@ -11,8 +11,13 @@ namespace helper
     public:
         Splitter();
         virtual ~Splitter();
-        std::vector<std::string> splitCommand(std::string &str);
-        std::vector<std::vector<std::string> > splitCommandByWord(std::vector<std::string> &sequence);
+        std::vector<std::string> splitCommand(std::string &a_rstrCommand ) const;
+        std::vector<std::vector<std::string>> splitCommandByWord
+                                              ( const std::vector<std::string> &a_rstrCommandSequence ) const;
+    private:
+        Splitter( const Splitter& );
+        Splitter& operator=( const Splitter& a_oSplitter );
+
     };
 }
 

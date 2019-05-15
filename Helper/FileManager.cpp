@@ -2,7 +2,7 @@
 
 
 
-helper::FileManager::FileManager(iLogger *a_poLogger) : m_poLogger( a_poLogger )
+helper::FileManager::FileManager( const iLogger &a_roLogger ) : m_roLogger( a_roLogger )
 {
 
 }

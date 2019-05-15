@@ -10,7 +10,8 @@ class iTranslator
 {
 public:
     virtual ~iTranslator();
-    virtual std::vector<utils::CommandStandardize> translateCommand( std::vector<std::vector<std::string>> comandsSplitByWord ) = 0;
+    virtual std::vector<utils::CommandStandardize> translateCommand
+                                               ( const std::vector<std::vector<std::string>> &a_rastrcomandsSplitByWord ) = 0;
 
 };
 
