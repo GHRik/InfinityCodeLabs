@@ -16,6 +16,7 @@ namespace helper
         Validator( iLogger *a_poLogger );
         utils::ErrorsCode validateCommand( std::string a_strCommand );
         void prepareToValidate(std::string a_strCommand);
+        bool isWithoutError( std::vector<std::string> a_astrCommands );
     private:
         iLogger *m_poLogger;
         void deleteRedundantSpace(std::string &str);

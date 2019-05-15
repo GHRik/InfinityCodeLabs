@@ -19,7 +19,7 @@ DatabaseManager::~DatabaseManager()
 void DatabaseManager::run()
 {
 
-    std::string commandsOneLine = "CREATE table ( \"Ala\", 60, 5.0, 2 );";
+    std::string commandsOneLine = "CREATE table (price : Integer, Author: varchar(30)); INSERT INTO table (1, \"Ja\"); SELECT price FROM table WHERE Author=\"Ja\"; DELETE FROM table WHERE a=b; DROP table; ";
     //getline( std::cin, commandsOneLine );
     std::vector<std::vector<std::string>> comandInOneWord;
     std::vector<std::string> commands;
@@ -34,6 +34,7 @@ void DatabaseManager::run()
            }
           for( uint16_t iter = 0; iter < commands.size(); ++iter)
           {
+             std::cout << commands.at(iter) << std::endl;
              if( utils::ErrorsCode::OK != m_poValidate->validateCommand(commands.at(iter)) )
              {
                  commands.erase(commands.begin()+iter);
@@ -53,39 +54,57 @@ void DatabaseManager::run()
 
 utils::ErrorsCode DatabaseManager::callCommand( utils::CommandStandardize Queue )
 {
-    switch( Queue.command )
+    if( true == m_poValidate->isWithoutError( Queue.params ) )
     {
-        case utils::dbCommand::CREATE :
-            m_poLogger->logInfo("CREATE called");
-            m_poLogger->logInfo("TableName: ");
-            m_poLogger->logInfo(Queue.tableName);
-            m_poLogger->logInfo("Params: ");
-            for(size_t i = 0; i < Queue.params.size();++i)
-            {
-                m_poLogger->logInfo(Queue.params.at(i));
-            }
-        break;
-        case utils::dbCommand::DELETE_FROM :
-            m_poLogger->logInfo("DELETE FROM called");
-        break;
-        case utils::dbCommand::INSERT_INTO :
-            m_poLogger->logInfo("INSERT INTO called");
-            m_poLogger->logInfo("TableName: ");
-            m_poLogger->logInfo(Queue.tableName);
-            m_poLogger->logInfo("Params: ");
-            for(size_t i = 0; i < Queue.params.size();++i)
-            {
-                m_poLogger->logInfo(Queue.params.at(i));
-            }
-        break;
-        case utils::dbCommand::SELECT :
-            m_poLogger->logInfo("SELECT called");
-        break;
-        case utils::dbCommand::DROP :
-            m_poLogger->logInfo("DROP called");
-        break;
-        case utils::dbCommand::UNDEFINED :
-            m_poLogger->logError("Undefined command");
-        break;
+
+        switch( Queue.command )
+        {
+            case utils::dbCommand::CREATE :
+                m_poLogger->logInfo("CREATE called");
+                m_poLogger->logInfo("TableName: ");
+                m_poLogger->logInfo(Queue.tableName);
+                m_poLogger->logInfo("Params: ");
+                for(size_t i = 0; i < Queue.params.size();++i)
+                {
+                    m_poLogger->logInfo(Queue.params.at(i));
+                }
+            break;
+            case utils::dbCommand::DELETE_FROM :
+                m_poLogger->logInfo("DELETE FROM called");
+                m_poLogger->logInfo("TableName: ");
+                m_poLogger->logInfo(Queue.tableName);
+                m_poLogger->logInfo("Params: ");
+                for(size_t i = 0; i < Queue.params.size();++i)
+                {
+                    m_poLogger->logInfo(Queue.params.at(i));
+                }
+            break;
+            case utils::dbCommand::INSERT_INTO :
+                m_poLogger->logInfo("INSERT INTO called");
+                m_poLogger->logInfo("TableName: ");
+                m_poLogger->logInfo(Queue.tableName);
+                m_poLogger->logInfo("Params: ");
+                for(size_t i = 0; i < Queue.params.size();++i)
+                {
+                    m_poLogger->logInfo(Queue.params.at(i));
+                }
+            break;
+            case utils::dbCommand::SELECT :
+                m_poLogger->logInfo("SELECT called");
+                m_poLogger->logInfo("TableName: ");
+                m_poLogger->logInfo(Queue.tableName);
+                m_poLogger->logInfo("Params: ");
+                for(size_t i = 0; i < Queue.params.size();++i)
+                {
+                    m_poLogger->logInfo(Queue.params.at(i));
+                }
+            break;
+            case utils::dbCommand::DROP :
+                m_poLogger->logInfo("DROP called");
+            break;
+            case utils::dbCommand::UNDEFINED :
+                m_poLogger->logError("Undefined command");
+            break;
+        }
     }
 }

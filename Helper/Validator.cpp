@@ -74,6 +74,20 @@ void helper::Validator::prepareToValidate(std::string a_strCommand)
     deleteRedundantSpace(a_strCommand);
 }
 
+bool helper::Validator::isWithoutError( std::vector<std::string> a_astrCommands )
+{
+    bool isFreeError = true;
+    for( uint16_t u16Iter = 0; u16Iter < a_astrCommands.size(); ++u16Iter )
+    {
+        if( "ERROR" == a_astrCommands.at(u16Iter) )
+        {
+            isFreeError = false;
+            break;
+        }
+    }
+    return isFreeError;
+}
+
 void helper::Validator::deleteRedundantSpace(std::string &str)
 {
     while( ' ' == *(str.begin()) )

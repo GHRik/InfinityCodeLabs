@@ -27,6 +27,7 @@ std::vector<std::string> helper::Splitter::splitCommand(std::string &str)
 
     for( uint16_t iter = 0; iter < str.length(); ++iter)
     {
+
         sequence += str.at(iter);
         if( ';' == str.at(iter) )
         {

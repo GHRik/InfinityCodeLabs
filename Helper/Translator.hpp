@@ -4,6 +4,7 @@
 #include "Interface/iTranslator.hpp"
 #include "Interface/iLogger.hpp"
 #include "Utils/DataBaseCommand.hpp"
+#include <algorithm>
 
 
 class Translator : public iTranslator
@@ -16,6 +17,8 @@ private:
     utils::dbCommand checkFirstWord( std::string word );
     std::vector<std::string> makeParamCreate( std::string word );
     std::vector<std::string> makeParamInsert( std::string word );
+    std::vector<std::string> makeParamSelect( std::string word);
+    std::string makeParamWhere( std::string word );
 };
 
 #endif // TRANSLATOR_HPP
