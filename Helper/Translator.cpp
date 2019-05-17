@@ -4,7 +4,9 @@
 #include <string>
 #include <vector>
 
-helper::Translator::Translator( const iLogger &a_roLogger ) : m_roLogger( a_roLogger )
+helper::Translator::Translator(const iLogger &a_roLogger , iFileManager &a_roFileManager)
+    : m_roLogger( a_roLogger ),
+      m_roFileManager( a_roFileManager )
 {
 
 }
@@ -20,7 +22,6 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
 
     for( uint16_t u16Iter = 0; u16Iter < a_rastrComandsSplitByWord.size(); ++u16Iter )
     {
-        //std::cout << iter;
         astrCommandParam.clear();
         strTableName = "";
         oDbCommand = checkFirstWord(a_rastrComandsSplitByWord.at(u16Iter).at(0));
@@ -28,6 +29,7 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
         switch( oDbCommand )
         {
             case utils::dbCommand::CREATE:
+            {
                 if( 2 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
                 {
                     astrCommandParam.push_back("ERROR");
@@ -43,9 +45,24 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
                     strTempWord += a_rastrComandsSplitByWord.at(u16Iter).at(i);
 
                 }
+
+                if( ';' == strTempWord.back() )
+                {
+                     strTempWord = strTempWord.substr( 0,strTempWord.length()-1 );
+                }
+                const std::string strTemp = strTempWord;
                 strTempWord = strTempWord.substr(strTempWord.find_first_of('(')+1,strTempWord.find_last_of(')')-1);
-                std::cout << strTempWord << std::endl;
-                astrCommandParam = makeParamCreate(strTempWord);
+                if( strTemp.length()-2 == strTempWord.length() )
+                {
+
+                    std::cout << strTempWord << std::endl;
+                    astrCommandParam = makeParamCreate(strTempWord);
+                }
+                else
+                {
+                    m_roLogger.logError("Unexpected expression after )");
+                }
+            }
             break;
 
             case utils::dbCommand::INSERT_INTO:
@@ -473,4 +490,165 @@ std::vector<std::string> helper::Translator::makeParamCreate( const std::string 
 
 
     return vectorOfParam;
+}
+
+std::vector<std::string> helper::Translator::splitCommand( std::string &a_rstrCommand ) const
+{
+    std::vector<std::string> aResult;
+    std::string strSequence = "";
+    while( ' ' == *( a_rstrCommand.begin() ) )
+    {
+        a_rstrCommand = a_rstrCommand.substr( 1, a_rstrCommand.size() );
+    }
+
+    while( ' ' == *( a_rstrCommand.rbegin() ) )
+    {
+        a_rstrCommand = a_rstrCommand.substr( 0, a_rstrCommand.size()-1 );
+    }
+
+    for( uint16_t iter = 0; iter < a_rstrCommand.length(); ++iter)
+    {
+
+        strSequence += a_rstrCommand.at(iter);
+        if( ';' == a_rstrCommand.at(iter) )
+        {
+            aResult.push_back( strSequence );
+            strSequence = "";
+        }
+    }
+    if( strSequence.length() > 0 )
+    {
+        aResult.push_back("ERROR");
+    }
+
+    return aResult;
+}
+
+std::vector<std::vector<std::string> > helper::Translator::splitCommandByWord
+                                                         ( const std::vector<std::string> &a_rstrCommandSequence ) const
+{
+    std::vector<std::string> strSeparateWords;
+    std::vector<std::vector<std::string>> astrResult;
+    std::string strTempWord = "";
+    bool isQuoteState = false;
+    for( size_t u16IterAllSequence = 0; u16IterAllSequence < a_rstrCommandSequence.size(); ++u16IterAllSequence)
+    {
+        for( uint16_t u16Iter = 0; u16Iter < a_rstrCommandSequence.at( u16IterAllSequence ).length(); ++u16Iter )
+        {
+
+            if( a_rstrCommandSequence.at( u16IterAllSequence ).at( u16Iter ) == '"' )
+            {
+                isQuoteState = !isQuoteState;
+            }
+            if( a_rstrCommandSequence.at( u16IterAllSequence ).at( u16Iter ) == ' ' && false == isQuoteState )
+            {
+                if( 0 < strTempWord.length() )
+                {
+                    strSeparateWords.push_back( strTempWord );
+                }
+                strTempWord = "";
+            }
+            else
+            {
+                strTempWord += a_rstrCommandSequence.at( u16IterAllSequence ).at( u16Iter );
+            }
+
+        }
+        if( 0 < strTempWord.length() )
+        {
+            strSeparateWords.push_back( strTempWord );
+            strTempWord = "";
+        }
+
+        astrResult.push_back( strSeparateWords );
+        strSeparateWords.clear();
+
+    }
+
+    return astrResult;
+}
+
+std::vector<std::string> helper::Translator::takeParam()
+{
+    std::string strMyParams;
+    std::vector<std::string> astrMyParams;
+    if(utils::ErrorsCode::OK == m_roFileManager.readLine(strMyParams, 0))
+    {
+        if( 0 != splitByDelimeter( strMyParams ,astrMyParams, ' ' ))
+        {
+            for( uint16_t u16Iter = 0; u16Iter < astrMyParams.size(); ++u16Iter )
+            {
+                if( (u16Iter % 2) ==  0 )
+                {
+                    astrMyParams.at(u16Iter) = "";
+                }
+            }
+            for( uint16_t u16Iter = 0; u16Iter < astrMyParams.size(); ++u16Iter )
+            {
+                if( "" == astrMyParams.at(u16Iter) )
+                {
+                    astrMyParams.erase( astrMyParams.begin()+u16Iter );
+                }
+            }
+            if( astrMyParams.back() == "" )
+            {
+                astrMyParams.pop_back();
+            }
+        }
+    }
+    return astrMyParams;
+
+}
+
+std::vector<std::string> helper::Translator::takeField()
+{
+    std::string strMyParams;
+    std::vector<std::string> astrMyParams;
+    if(utils::ErrorsCode::OK == m_roFileManager.readLine(strMyParams,0))
+    {
+        if( 0 != splitByDelimeter( strMyParams ,astrMyParams, ' ' ))
+        {
+            for( uint16_t u16Iter = 0; u16Iter < astrMyParams.size(); ++u16Iter )
+            {
+                if( (u16Iter % 2) !=  0 )
+                {
+                    astrMyParams.at(u16Iter) = "";
+                }
+            }
+            for( uint16_t u16Iter = 0; u16Iter < astrMyParams.size(); ++u16Iter )
+            {
+                if( "" == astrMyParams.at(u16Iter) )
+                {
+                    astrMyParams.erase( astrMyParams.begin()+u16Iter );
+                }
+            }
+            if( astrMyParams.back() == "" )
+            {
+                astrMyParams.pop_back();
+            }
+        }
+    }
+    return astrMyParams;
+}
+
+//From https://stackoverflow.com/questions/5888022/split-string-by-single-spaces
+size_t helper::Translator::splitByDelimeter(const std::string &a_strTextToSplit, std::vector<std::string> &a_rastrResult, char a_chDelimeter)
+{
+    size_t pos = a_strTextToSplit.find( a_chDelimeter );
+    size_t initialPos = 0;
+    a_rastrResult.clear();
+
+    // Decompose statement
+    while( pos != std::string::npos ) {
+        a_rastrResult.push_back( a_strTextToSplit.substr( initialPos, pos - initialPos ) );
+        initialPos = pos + 1;
+
+        pos = a_strTextToSplit.find( a_chDelimeter, initialPos );
+    }
+
+    // Add the last one
+    a_rastrResult.push_back( a_strTextToSplit.substr( initialPos,
+                                                      std::min( pos, a_strTextToSplit.size() ) - initialPos + 1 ) );
+
+    return a_rastrResult.size();
 }

@@ -7,7 +7,6 @@
 #include "Interface/iFileManager.hpp"
 #include "Interface/iValidate.hpp"
 #include "Interface/iLogger.hpp"
-#include "Interface/iSplitter.hpp"
 #include "Helper/Logger.hpp"
 #include "Helper/FileManager.hpp"
 #include "Helper/Validator.hpp"
@@ -27,7 +26,6 @@ public:
       const iLogger &a_roLogger,
       iValidate &a_roValidate,
       iFileManager &a_roFileManager,
-      iSplitter &a_roSplitter,
       iTranslator &a_roTranslator
     );
     ~DatabaseManager();
@@ -36,9 +34,8 @@ private:
     const iLogger &m_roLogger;
     iValidate &m_roValidate;
     iFileManager &m_roFileManager;
-    iSplitter &m_roSplitter;
     iTranslator &m_roTranslator;
-    void callCommand( const utils::CommandStandardize &a_roCommand  ) const;
+    void callCommand(utils::CommandStandardize &a_roCommand  ) const;
     DatabaseManager();
     DatabaseManager( const DatabaseManager& );
     DatabaseManager& operator=( const DatabaseManager& a_oDatabaseManager );

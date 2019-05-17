@@ -5,6 +5,11 @@
 #include "Interface/iLogger.hpp"
 #include "Interface/iFileManager.hpp"
 #include <string>
+#include <fstream>
+#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
 namespace helper
 {
@@ -13,30 +18,27 @@ namespace helper
     public:
         FileManager( const iLogger &a_roLogger );
         ~FileManager();
-        utils::ErrorsCode openFile( const std::string a_strFileName );
-        utils::ErrorsCode closeFile();
-        utils::ErrorsCode writeToFile( const std::string a_strText );
-        utils::ErrorsCode removeLineFromFile( const uint16_t a_u16LineNumber );
-        utils::ErrorsCode clearFile();
-        utils::ErrorsCode printFile( const std::string a_strFileName );
     private:
         const iLogger &m_roLogger;
-        std::string *m_strOpenFileName;
+        std::fstream m_oFile;
+        std::string m_strFileName;
+        const std::string m_strFileExtension;
         FileManager();
         FileManager( const FileManager& );
         FileManager& operator=( const FileManager& a_oFileManager );
-
+        bool isFileOpen();
+        uint16_t countLine();
 
         // iFileManager interface
     public:
-        utils::ErrorsCode createFile(std::string a_strFileName);
-        utils::ErrorsCode deleteFile(std::string a_strFileName);
-        utils::ErrorsCode addRecordToFile(std::string a_strFileName, std::string a_strColumnName, std::string a_strValue);
-        utils::ErrorsCode printRecordFromFile(std::string a_strFileName);
-        utils::ErrorsCode printRecordFromFile(std::string a_strFileName, std::string a_strColumnName);
-        utils::ErrorsCode printRecordFromFile(std::string a_strFileName, std::string a_strColumnName, std::string a_strValue);
-        utils::ErrorsCode removeRecordFromFile(std::string a_strFileName);
-        utils::ErrorsCode removeRecordFromFile(std::string a_strFileName, std::string a_strColumnName, std::string a_strValue);
+        utils::ErrorsCode create(const std::string &a_rstrFileName);
+        utils::ErrorsCode open( const std::string &a_rstrFileName );
+        void closeFile();
+        utils::ErrorsCode deleteFile(const std::string &a_rstrFileName) const;
+        utils::ErrorsCode write(const std::string &a_rstrWord , const bool bNewLine);
+        bool isFileExist( const std::string &a_rstrFileName) const;
+        utils::ErrorsCode readLine(std::string &a_rastrWords , const uint8_t a_u8NumberLine);
+        utils::ErrorsCode deleteLine(uint16_t a_u16LineNumber );
     };
 }
 

@@ -3,19 +3,19 @@
 
 #include "Utils/ErrorsCode.hpp"
 #include <string>
+#include <vector>
 
 class iFileManager
 {
 public:
     virtual ~iFileManager();
-    virtual utils::ErrorsCode createFile( std::string a_strFileName ) = 0;
-    virtual utils::ErrorsCode deleteFile( std::string a_strFileName ) = 0;
-    virtual utils::ErrorsCode addRecordToFile( std::string a_strFileName, std::string a_strColumnName, std::string a_strValue ) = 0;
-    virtual utils::ErrorsCode printRecordFromFile( std::string a_strFileName ) = 0;
-    virtual utils::ErrorsCode printRecordFromFile( std::string a_strFileName, std::string a_strColumnName ) = 0;
-    virtual utils::ErrorsCode printRecordFromFile( std::string a_strFileName, std::string a_strColumnName, std::string a_strValue ) = 0;
-    virtual utils::ErrorsCode removeRecordFromFile( std::string a_strFileName ) = 0;
-    virtual utils::ErrorsCode removeRecordFromFile( std::string a_strFileName, std::string a_strColumnName, std::string a_strValue ) = 0;
+    virtual utils::ErrorsCode create( const std::string &a_rstrFileName ) = 0;
+    virtual utils::ErrorsCode open( const std::string &a_rstrFileName ) = 0;
+    virtual void closeFile() = 0;
+    virtual utils::ErrorsCode readLine( std::string &a_rastrWord, const uint8_t a_u8NumberLine  ) = 0;
+    virtual utils::ErrorsCode deleteFile( const std::string &a_rstrFileName ) const = 0;
+    virtual utils::ErrorsCode deleteLine( uint16_t a_u8LineNumber ) = 0;
+    virtual utils::ErrorsCode write( const std::string &a_rstrWord, const bool bNewline = false ) = 0;
 
 
 };

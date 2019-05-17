@@ -23,6 +23,8 @@ namespace utils
         std::vector<std::string> params;
     };
 
+    static std::vector<std::string> astrKeyWord = {"CREATE", "SELECT", "DROP", "INSERT", "INTO", "DELETE", "FROM"};
+
 }
 
 #endif // DATABASECOMMAND_HPP

@@ -4,7 +4,6 @@
 #include <vector>
 #include "Helper/FileManager.hpp"
 #include "Helper/Logger.hpp"
-#include "Helper/Splitter.hpp"
 #include "Helper/Validator.hpp"
 #include "Helper/Translator.hpp"
 
@@ -15,8 +14,7 @@ int main()
 
     helper::Validator oValidator( helper::Logger::getInstance() );
     helper::FileManager oFileManager( helper::Logger::getInstance() );
-    helper::Splitter oSplitter;
-    helper::Translator oTranslator( helper::Logger::getInstance() );
-    DatabaseManager dbManager( helper::Logger::getInstance(), oValidator, oFileManager, oSplitter, oTranslator );
+    helper::Translator oTranslator( helper::Logger::getInstance(), oFileManager );
+    DatabaseManager dbManager( helper::Logger::getInstance(), oValidator, oFileManager, oTranslator );
     dbManager.run();
 }

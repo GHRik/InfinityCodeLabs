@@ -6,9 +6,8 @@ namespace utils
     enum ErrorsCode
     {
         OK,
-        NULLPTR_EXPECTION,
         BAD_COMMAND,
-        LOGGER_PROBLEM,
+        FILE_ERROR,
         EMPTY_STRING,
         UNDEFINED_COMMAND,
 
