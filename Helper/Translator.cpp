@@ -24,7 +24,7 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
     {
         astrCommandParam.clear();
         strTableName = "";
-        oDbCommand = checkFirstWord( a_rastrComandsSplitByWord.at(u16Iter).at(0)) ;
+        oDbCommand = checkFirstWord( a_rastrComandsSplitByWord.at( u16Iter ).at( 0 ) ) ;
         std::string strTempWord = "";
         switch( oDbCommand )
         {

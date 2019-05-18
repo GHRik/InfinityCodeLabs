@@ -1,16 +1,14 @@
 #include "Helper/FileManager.hpp"
 
-helper::FileManager::FileManager( const iLogger &a_roLogger ) : m_roLogger( a_roLogger ), m_strFileExtension( "txt" )
+helper::FileManager::FileManager( const iLogger &a_roLogger )
+    : m_roLogger( a_roLogger ), m_strFileExtension( fileConfig::fileExtension )
 {
 
 }
 
 helper::FileManager::~FileManager()
 {
-    if( true == isFileOpen() )
-    {
-        closeFile();
-    }
+    closeFile();
 }
 
 void helper::FileManager::closeFile()
@@ -126,20 +124,20 @@ utils::ErrorsCode helper::FileManager::write( const std::string &a_rstrWord, con
 uint16_t helper::FileManager::countLine()
 {
     uint16_t u16CountLine = 0;
-        if( true == isFileOpen() )
+    if( true == isFileOpen() )
+    {
+        std::string strTemp = "";
+        while( std::getline( m_oFile, strTemp ) )
         {
-            std::string strTemp = "";
-            while( std::getline( m_oFile, strTemp ) )
-            {
-                ++u16CountLine;
-            }
+            ++u16CountLine;
         }
-        closeFile();
-        if( utils::ErrorsCode::OK != open(m_strFileName) )
-        {
-            u16CountLine = 0;
-        }
-        return u16CountLine;
+    }
+    closeFile();
+    if( utils::ErrorsCode::OK != open(m_strFileName) )
+    {
+        u16CountLine = 0;
+    }
+    return u16CountLine;
 }
 
 
@@ -162,29 +160,29 @@ utils::ErrorsCode helper::FileManager::readLine( std::string &a_rastrWord, const
     if( true == isFileOpen() )
     {
         uint16_t u16LineCounter = countLine();
-        if( u16LineCounter != 0 )
+        if( 0 != u16LineCounter )
         {
             for( uint16_t u16Iter = 0; u16Iter < u16LineCounter; ++u16Iter )
             {
                 if( a_u8NumberLine == u16Iter )
                 {
-                    getline(m_oFile, a_rastrWord);
+                    getline( m_oFile, a_rastrWord );
                     break;
                 }
 
-                getline(m_oFile, a_rastrWord);
+                getline( m_oFile, a_rastrWord );
             }
         }
         else
         {
             oError = utils::ErrorsCode::FILE_ERROR;
-            m_roLogger.logError("File is empty");
+            m_roLogger.logError( "File is empty" );
         }
     }
     else
     {
         oError = utils::ErrorsCode::FILE_ERROR;
-        m_roLogger.logError("Can not read from file");
+        m_roLogger.logError( "Can not read from file" );
 
     }
     return oError;
@@ -193,37 +191,6 @@ utils::ErrorsCode helper::FileManager::readLine( std::string &a_rastrWord, const
 
 utils::ErrorsCode helper::FileManager::deleteLine(uint16_t a_u16LineNumber)
 {
-//    utils::ErrorsCode oError = utils::ErrorsCode::OK;
-//    if( true == isFileOpen() )
-//    {
-//        uint16_t u16LineCounter = countLine();
-//        if( u16LineCounter != 0 )
-//        {
-//            for( uint16_t u16Iter = 0; u16Iter < u16LineCounter; ++u16Iter )
-//            {
-//                std::string strTemp;
-//                for( uint16_t u16Iter = 0; u16Iter < u16LineCounter; ++u16Iter )
-//                {
-//                    getline( m_oFile, strTemp );
-//                    if( a_u16LineNumber == u16Iter )
-//                    {
-
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//        else
-//        {
-//            m_roLogger.logError("File is empty");
-//        }
-//    }
-//    else
-//    {
-//        oError = utils::ErrorsCode::FILE_ERROR;
-//        m_roLogger.logError("Can not read from file");
-
-    //    }
 }
 
 std::string helper::FileManager::readAll()
@@ -234,14 +201,12 @@ std::string helper::FileManager::readAll()
     if( utils::ErrorsCode::OK == open( m_strFileName ) )
     {
         getline( m_oFile, strTemp ); //skip first line
-        while(getline( m_oFile, strTemp ))
+        while( getline( m_oFile, strTemp ) )
         {
             strResult += strTemp;
             strResult += '\n';
         }
     }
-
-
     return strResult;
 
 }
@@ -263,7 +228,7 @@ utils::ErrorsCode helper::FileManager::readLine(std::string &a_rastrWord)
     return oError;
 }
 
-utils::ErrorsCode helper::FileManager::deleteAllLine(const std::string &a_rstrFileName)
+utils::ErrorsCode helper::FileManager::deleteAllLine( const std::string &a_rstrFileName )
 {
     utils::ErrorsCode oError = utils::ErrorsCode::OK;
     std::string strFileName = a_rstrFileName+"."+m_strFileExtension;
@@ -272,14 +237,14 @@ utils::ErrorsCode helper::FileManager::deleteAllLine(const std::string &a_rstrFi
     {
         getline( m_oFile, strFirstLineToSave );
         std::string strTempFileName = "TEMPORARY.txt";
-        std::ofstream oDescriptor(strTempFileName);
+        std::ofstream oDescriptor( strTempFileName );
         closeFile();
         oDescriptor.close();
-        oDescriptor.open(strTempFileName);
-        oDescriptor.write(strFirstLineToSave.c_str(),static_cast<uint16_t>(strFirstLineToSave.length()));
+        oDescriptor.open( strTempFileName );
+        oDescriptor.write( strFirstLineToSave.c_str(), static_cast<uint16_t>( strFirstLineToSave.length() ) );
         oDescriptor.close();
-        deleteFile(a_rstrFileName.c_str());
-        rename(strTempFileName.c_str(),strFileName.c_str());
+        deleteFile( a_rstrFileName.c_str() );
+        rename( strTempFileName.c_str(),strFileName.c_str() );
     }
     else
     {

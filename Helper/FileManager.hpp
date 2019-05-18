@@ -4,6 +4,7 @@
 #include "Utils/ErrorsCode.hpp"
 #include "Interface/iLogger.hpp"
 #include "Interface/iFileManager.hpp"
+#include "Utils/FileConfig.hpp"
 #include <string>
 #include <fstream>
 #include <cstdio>

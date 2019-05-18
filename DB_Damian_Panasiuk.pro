@@ -33,4 +33,5 @@ HEADERS += \
     Interface/iValidate.hpp \
     Utils/DataBaseCommand.hpp \
     Utils/ErrorsCode.hpp \
+    Utils/FileConfig.hpp \
     Utils/UsedType.hpp
