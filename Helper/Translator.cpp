@@ -219,7 +219,6 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
                     {
                         astrCommandParam.push_back(astrTempBuff.at(u16It));
                     }
-                    //astrCommandParam.push_back(strTempWord);
 
                     for(size_t i = 0; i < a_rastrComandsSplitByWord.at(u16Iter).size(); ++i)
                     {

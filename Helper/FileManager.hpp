@@ -6,7 +6,7 @@
 #include "Interface/iFileManager.hpp"
 #include <string>
 #include <fstream>
-#include <stdio.h>
+#include <cstdio>
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -41,6 +41,7 @@ namespace helper
         utils::ErrorsCode deleteLine(uint16_t a_u16LineNumber );
         std::string readAll();
         utils::ErrorsCode readLine(std::string &a_rastrWord);
+        utils::ErrorsCode deleteAllLine(const std::string &a_rstrFileName);
     };
 }
 

@@ -16,6 +16,7 @@ public:
     virtual utils::ErrorsCode readLine( std::string &a_rastrWord ) = 0;
     virtual std::string readAll() = 0;
     virtual utils::ErrorsCode deleteFile( const std::string &a_rstrFileName ) const = 0;
+    virtual utils::ErrorsCode deleteAllLine( const std::string &a_rstrFileName ) = 0;
     virtual utils::ErrorsCode deleteLine( uint16_t a_u8LineNumber ) = 0;
     virtual utils::ErrorsCode write( const std::string &a_rstrWord, const bool bNewline = false ) = 0;
 

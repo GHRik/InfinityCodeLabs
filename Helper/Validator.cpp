@@ -109,9 +109,13 @@ utils::ErrorsCode helper::Validator::validateStandarizeCommand( utils::CommandSt
         if( 0 != a_roCommand.params.size() )
         {
             bool isFieldName = true;
+            std::vector<std::string> fieldName;
             for( uint16_t u16Iter = 0; u16Iter < a_roCommand.params.size(); ++u16Iter )
             {
-
+                if( true == isFieldName )
+                {
+                    fieldName.push_back(a_roCommand.params.at(u16Iter));
+                }
                 if( true == isFieldName && false == isValidFieldName( a_roCommand.params.at(u16Iter) ) )
                 {
                     oError = utils::ErrorsCode::BAD_COMMAND;
@@ -125,6 +129,23 @@ utils::ErrorsCode helper::Validator::validateStandarizeCommand( utils::CommandSt
                 }
                 isFieldName = !isFieldName;
             }
+            for( uint16_t u16It = 0; u16It < fieldName.size(); ++u16It )
+            {
+                if( utils::ErrorsCode::OK != oError )
+                {
+                    break;
+                }
+
+                for( uint16_t u16Iter = 0; u16Iter < fieldName.size(); ++u16Iter )
+                {
+                    if( fieldName.at(u16It) == fieldName.at( u16Iter ) && u16It != u16Iter )
+                    {
+                        oError = utils::ErrorsCode::BAD_COMMAND;
+                        m_roLogger.logError("Field name must be unique");
+                        break;
+                    }
+                }
+            }
         }
         else
         {
@@ -137,6 +158,7 @@ utils::ErrorsCode helper::Validator::validateStandarizeCommand( utils::CommandSt
     case utils::dbCommand::SELECT:
         if( 0 == a_roCommand.params.size() )
         {
+            m_roLogger.logError("SELECT call without param");
             oError = utils::ErrorsCode::BAD_COMMAND;
         }
         else
@@ -146,6 +168,11 @@ utils::ErrorsCode helper::Validator::validateStandarizeCommand( utils::CommandSt
         break;
 
     case utils::dbCommand::DELETE_FROM:
+        if( a_roCommand.params.size() > 1 )
+        {
+            oError = utils::ErrorsCode::BAD_COMMAND;
+            m_roLogger.logError("Unecessary param in DELETE");
+        }
 
         break;
 
@@ -153,7 +180,7 @@ utils::ErrorsCode helper::Validator::validateStandarizeCommand( utils::CommandSt
         if( 0 == a_roCommand.params.size() )
         {
             oError = utils::ErrorsCode::BAD_COMMAND;
-            m_roLogger.logError("INSER call without param");
+            m_roLogger.logError("INSERT call without param");
         }
         break;
 

@@ -262,3 +262,28 @@ utils::ErrorsCode helper::FileManager::readLine(std::string &a_rastrWord)
     }
     return oError;
 }
+
+utils::ErrorsCode helper::FileManager::deleteAllLine(const std::string &a_rstrFileName)
+{
+    utils::ErrorsCode oError = utils::ErrorsCode::OK;
+    std::string strFileName = a_rstrFileName+"."+m_strFileExtension;
+    std::string strFirstLineToSave = "";
+    if( utils::ErrorsCode::OK == open(a_rstrFileName) )
+    {
+        getline( m_oFile, strFirstLineToSave );
+        std::string strTempFileName = "TEMPORARY.txt";
+        std::ofstream oDescriptor(strTempFileName);
+        closeFile();
+        oDescriptor.close();
+        oDescriptor.open(strTempFileName);
+        oDescriptor.write(strFirstLineToSave.c_str(),static_cast<uint16_t>(strFirstLineToSave.length()));
+        oDescriptor.close();
+        deleteFile(a_rstrFileName.c_str());
+        rename(strTempFileName.c_str(),strFileName.c_str());
+    }
+    else
+    {
+        oError = utils::ErrorsCode::FILE_ERROR;
+    }
+    return oError;
+}

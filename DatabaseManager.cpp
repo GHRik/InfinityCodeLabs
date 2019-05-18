@@ -96,6 +96,7 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
                     break;
                 }
             }
+            m_roFileManager.deleteAllLine(a_roCommand.tableName);
             break;
 
         case utils::dbCommand::INSERT_INTO :
