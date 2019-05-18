@@ -17,7 +17,7 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
     utils::CommandStandardize oCommand = {};
     std::vector<utils::CommandStandardize> aoStandarizeCommand;
     utils::dbCommand oDbCommand = utils::dbCommand::UNDEFINED;
-    std::string strTableName = "";
+    std::string strTableName = "" ;
     std::vector<std::string> astrCommandParam = {};
 
     for( uint16_t u16Iter = 0; u16Iter < a_rastrComandsSplitByWord.size(); ++u16Iter )

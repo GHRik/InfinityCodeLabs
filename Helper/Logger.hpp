@@ -9,13 +9,13 @@ namespace helper
     {
     public:
         static Logger const &getInstance();
-        void logError( const std::string a_rstrErrorMessage ) const;
-        void logWarrning( const std::string a_strWarrningMessage ) const;
-        void logInfo( const std::string a_strInfoMessage ) const;
+        void logError( const std::string &a_rstrErrorMessage ) const;
+        void logWarrning( const std::string &a_strWarrningMessage ) const;
+        void logInfo( const std::string &a_strInfoMessage ) const;
     private:
         explicit Logger();
         virtual ~Logger();
-        Logger( const Logger& );
+        explicit Logger( const Logger& );
         Logger& operator=( const Logger& a_oLogger );
 
 

@@ -17,17 +17,17 @@ const helper::Logger &helper::Logger::getInstance()
     return oInstance;
 }
 
-void helper::Logger::logError( const std::string a_rstrErrorMessage ) const
+void helper::Logger::logError( const std::string &a_rstrErrorMessage ) const
 {
     std::cout <<"ERROR: " << a_rstrErrorMessage << std::endl;
 }
 
-void helper::Logger::logWarrning( const std::string a_strWarrningMessage ) const
+void helper::Logger::logWarrning( const std::string &a_rstrWarrningMessage ) const
 {
-    std::cout <<"WARRNING: " << a_strWarrningMessage << std::endl;
+    std::cout <<"WARRNING: " << a_rstrWarrningMessage << std::endl;
 }
 
-void helper::Logger::logInfo( const std::string a_strInfoMessage ) const
+void helper::Logger::logInfo(const std::string &a_rstrInfoMessage ) const
 {
-    std::cout <<"INFO: " << a_strInfoMessage << std::endl;
+    std::cout <<"INFO: " << a_rstrInfoMessage << std::endl;
 }

@@ -7,9 +7,9 @@ class iLogger
 {
 public:
     virtual ~iLogger();
-    virtual void logError( std::string a_strErrorMessage ) const = 0;
-    virtual void logWarrning( std::string a_strErrorMessage ) const = 0;
-    virtual void logInfo( std::string a_strErrorMessage ) const = 0;
+    virtual void logError( const std::string &a_rstrErrorMessage ) const = 0;
+    virtual void logWarrning( const std::string &a_rstrErrorMessage ) const = 0;
+    virtual void logInfo( const std::string &a_rstrErrorMessage ) const = 0;
 };
 
 #endif // ILOGGER_HPP

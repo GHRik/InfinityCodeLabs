@@ -31,17 +31,18 @@ namespace helper
 
         // iFileManager interface
     public:
-        utils::ErrorsCode create(const std::string &a_rstrFileName);
+
+        utils::ErrorsCode create( const std::string &a_rstrFileName);
         utils::ErrorsCode open( const std::string &a_rstrFileName );
         void closeFile();
-        utils::ErrorsCode deleteFile(const std::string &a_rstrFileName) const;
-        utils::ErrorsCode write(const std::string &a_rstrWord , const bool bNewLine);
+        utils::ErrorsCode deleteFile( const std::string &a_rstrFileName ) const;
+        utils::ErrorsCode write( const std::string &a_rstrWord , const bool bNewLine );
         bool isFileExist( const std::string &a_rstrFileName) const;
-        utils::ErrorsCode readLine(std::string &a_rastrWords , const uint8_t a_u8NumberLine);
-        utils::ErrorsCode deleteLine(uint16_t a_u16LineNumber );
+        utils::ErrorsCode readLine( std::string &a_rastrWords , const uint8_t a_u8NumberLine );
+        utils::ErrorsCode deleteLine( uint16_t a_u16LineNumber );
         std::string readAll();
-        utils::ErrorsCode readLine(std::string &a_rastrWord);
-        utils::ErrorsCode deleteAllLine(const std::string &a_rstrFileName);
+        utils::ErrorsCode readLine( std::string &a_rastrWord );
+        utils::ErrorsCode deleteAllLine( const std::string &a_rstrFileName );
     };
 }
 
