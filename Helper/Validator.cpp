@@ -299,7 +299,7 @@ bool helper::Validator::isVarcharType( const std::string &a_roTypeName ) const
     return isVarchar;
 }
 
-//Definition From: https://stackoverflow.com/questions/4654636/how-to-determine-if-a-string-is-a-number-with-c
+//Implementation from: https://stackoverflow.com/questions/4654636/how-to-determine-if-a-string-is-a-number-with-c
 bool helper::Validator::isNumber( const std::string &a_rstrWord ) const
 {
     return !a_rstrWord.empty() && std::find_if(a_rstrWord.begin(), a_rstrWord.end(),

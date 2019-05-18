@@ -6,7 +6,7 @@
 namespace helper
 {
 ///
-/// \brief The Logger class is Singletoon. This class is used to log in any casy of error, warrning and info.
+/// \brief The Logger class is Singletoon. This class is used to logging in any casy of error, warrning and info.
 ///
     class Logger : public iLogger
     {

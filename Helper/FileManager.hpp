@@ -1,5 +1,3 @@
-
-
 #ifndef FILEMANAGER_HPP
 #define FILEMANAGER_HPP
 
@@ -15,9 +13,9 @@
 
 namespace helper
 {
-///
-/// \brief The FileManager class is used to operate on file
-///
+    ///
+    /// \brief The FileManager class is used to operate on file
+    ///
     class FileManager : public iFileManager
     {
     public:
