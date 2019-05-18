@@ -7,6 +7,7 @@ SOURCES += \
         DatabaseManager.cpp \
         Helper/FileManager.cpp \
         Helper/Logger.cpp \
+        Helper/Printer.cpp \
         Helper/Translator.cpp \
         Helper/Validator.cpp \
         Interface/iFileManager.cpp \
@@ -20,6 +21,7 @@ HEADERS += \
     DatabaseManager.hpp \
     Helper/FileManager.hpp \
     Helper/Logger.hpp \
+    Helper/Printer.hpp \
     Helper/Translator.hpp \
     Helper/Validator.hpp \
     Interface/iFileManager.hpp \

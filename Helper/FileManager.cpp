@@ -214,5 +214,20 @@ utils::ErrorsCode helper::FileManager::deleteLine(uint16_t a_u16LineNumber)
 //        oError = utils::ErrorsCode::FILE_ERROR;
 //        m_roLogger.logError("Can not read from file");
 
-//    }
+    //    }
+}
+
+std::string helper::FileManager::readAll()
+{
+    std::string strResult = "";
+    std::string strTemp = "";
+    getline( m_oFile, strTemp ); //skip first line
+    while(getline( m_oFile, strTemp ))
+    {
+        strResult += strTemp;
+        strResult += '\n';
+    }
+
+    return strResult;
+
 }

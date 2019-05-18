@@ -16,6 +16,7 @@ public:
     virtual bool isWithoutError( const std::vector<std::string> &a_arstrCommands ) const = 0;
     virtual utils::ErrorsCode validateStandarizeCommand( utils::CommandStandardize &a_roCommand ) const = 0;
     virtual bool isValidateParam( std::string a_strParamInBase, std::string &a_rstrParamInCommand ) = 0;
+    virtual bool isValidateFieldName( const std::string &a_strFieldNameBase, const std::string &a_strNameInCommand ) = 0;
 };
 
 #endif // IVALIDATE_HPP

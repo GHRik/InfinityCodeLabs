@@ -34,6 +34,7 @@ namespace helper
         bool isFloat(std::string &a_rstrWord ) const;
         bool isInt(std::string &a_rstrWord ) const;
         bool isVarcharValid(std::string &a_rstrWord , const uint16_t sizeOfVarchar) const;
+        void makeVectorUnique( std::vector<std::string> &a_rastrVector ) const;
 
         Validator();
         Validator( const Validator& );
@@ -41,6 +42,7 @@ namespace helper
 
     public:
         bool isValidateParam(std::string a_strParamInBase, std::string &a_rstrParamInCommand);
+        bool isValidateFieldName( const std::string &a_strFieldNameBase, const std::string &a_strNameInCommand );
     };
 }
 

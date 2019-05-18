@@ -135,7 +135,14 @@ utils::ErrorsCode helper::Validator::validateStandarizeCommand( utils::CommandSt
     break;
 
     case utils::dbCommand::SELECT:
-
+        if( 0 == a_roCommand.params.size() )
+        {
+            oError = utils::ErrorsCode::BAD_COMMAND;
+        }
+        else
+        {
+            makeVectorUnique( a_roCommand.params );
+        }
         break;
 
     case utils::dbCommand::DELETE_FROM:
@@ -426,6 +433,16 @@ bool helper::Validator::isValidateParam( std::string a_strParamInBase, std::stri
 
 }
 
+bool helper::Validator::isValidateFieldName(const std::string &a_strFieldNameBase, const std::string &a_strNameInCommand)
+{
+    bool isValide = false;
+    if( a_strFieldNameBase == a_strNameInCommand )
+    {
+        isValide = true;
+    }
+    return isValide;
+}
+
 bool helper::Validator::isFloat( std::string &a_rstrWord) const
 {
     bool isFloat = true;
@@ -530,4 +547,10 @@ bool helper::Validator::isVarcharValid(std::string &a_rstrWord, const uint16_t s
     }
     return isValid;
 
+}
+
+void helper::Validator::makeVectorUnique(std::vector<std::string> &a_rastrVector) const
+{
+    std::sort( a_rastrVector.begin(), a_rastrVector.end() );
+    a_rastrVector.erase( unique( a_rastrVector.begin(), a_rastrVector.end() ), a_rastrVector.end() );
 }

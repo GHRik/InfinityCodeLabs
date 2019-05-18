@@ -212,7 +212,13 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
                         }
                         strTempWord += a_rastrComandsSplitByWord.at(u16Iter).at(u16IterByWord);
                     }
-                    astrCommandParam.push_back(strTempWord);
+                    std::vector<std::string> astrTempBuff;
+                    splitByDelimeter(strTempWord, astrTempBuff, ',' );
+                    for( uint16_t u16It = 0; u16It < astrTempBuff.size(); ++u16It )
+                    {
+                        astrCommandParam.push_back(astrTempBuff.at(u16It));
+                    }
+                    //astrCommandParam.push_back(strTempWord);
 
                     for(size_t i = 0; i < a_rastrComandsSplitByWord.at(u16Iter).size(); ++i)
                     {

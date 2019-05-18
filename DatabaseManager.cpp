@@ -6,12 +6,14 @@ DatabaseManager::DatabaseManager
         const iLogger &a_roLogger,
         iValidate &a_roValidate,
         iFileManager &a_roFileManager,
-        iTranslator &a_roTranslator
+        iTranslator &a_roTranslator,
+        const iPrinter &a_roPrinter
         )
     : m_roLogger( a_roLogger ),
       m_roValidate( a_roValidate ),
       m_roFileManager( a_roFileManager ),
-      m_roTranslator( a_roTranslator )
+      m_roTranslator( a_roTranslator ),
+      m_roPrinter( a_roPrinter )
 {
 
 }
@@ -24,7 +26,7 @@ DatabaseManager::~DatabaseManager()
 void DatabaseManager::run() const
 {
 
-    std::string commandsOneLine = " INSERT INTO BookInventory (\"600\", -2, -2, 0) ; INSERT INTO BookInventory (\"600\", 2, 20.5, 1); INSERT INTO BookInventory (\"600\", 2, 20.5, 1); INSERT INTO BookInventory (\"600\", 2, 20.5, 1); INSERT INTO BookInventory (\"600\", 2, 20.5, 1); INSERT INTO BookInventory (\"600\", 2, 20.5, 1);  ";
+    std::string commandsOneLine = "  SELECT 1 FROM BookInventory;  ";
     //getline( std::cin, commandsOneLine );
     std::vector<std::vector<std::string>> astrComandInOneWord;
     std::vector<std::string> astrCommand;
@@ -147,6 +149,62 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
             {
                 m_roLogger.logInfo(a_roCommand.params.at(i));
             }
+
+            if( utils::ErrorsCode::OK == ( m_roFileManager.open( a_roCommand.tableName ) ) )
+            {
+                std::vector<std::string> astrMyField = m_roTranslator.takeField();
+                if( "*" == a_roCommand.params.at(0) && 1 == a_roCommand.params.size() )
+                {
+                    std::string strTemp = "";
+                    strTemp += a_roCommand.tableName +'\n';
+                    for( uint16_t u16Iter = 0; u16Iter < astrMyField.size(); ++u16Iter  )
+                    {
+                        strTemp += astrMyField.at(u16Iter) + " ";
+
+                    }
+                    strTemp += '\n';
+                    strTemp += m_roFileManager.readAll();
+                    m_roPrinter.printDataBase(strTemp);
+
+                }
+                else
+                {
+
+
+                    if(  a_roCommand.params.size() <= astrMyField.size() )
+                    {
+                        bool isParamGood = true;
+                        bool isFieldExist = false;
+                        for( uint16_t u16It = 0; u16It < a_roCommand.params.size(); ++u16It )
+                        {
+                            for( uint16_t u16Iter = 0; u16Iter < astrMyField.size(); ++u16Iter )
+                            {
+                                isFieldExist = false;
+                                if( m_roValidate.isValidateFieldName(a_roCommand.params.at(u16It),astrMyField.at(u16Iter) ) )
+                                {
+                                    isFieldExist = true;
+                                    break;
+                                }
+                            }
+                            if( false == isFieldExist )
+                            {
+                                m_roLogger.logError( " Use param in SELECT is not field name " );
+                                isParamGood = false;
+                                break;
+                            }
+                        }
+                        if( true == isParamGood )
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        m_roLogger.logError("Too much arguments");
+                    }
+                }
+            }
+
             break;
 
         case utils::dbCommand::DROP :
