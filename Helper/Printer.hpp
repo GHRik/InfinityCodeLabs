@@ -12,7 +12,7 @@ namespace helper
     class Printer : public iPrinter
     {
     public:
-        explicit Printer();
+        Printer();
         ~Printer();
 
         ///
@@ -22,8 +22,8 @@ namespace helper
         void printDataBase( const std::string &a_rstrWord) const;
 
     private:
-        explicit Printer( const Printer& );
-        Printer& operator=( const Printer& Translator );
+        explicit Printer( const Printer& a_roPrinter );
+        Printer& operator=( const Printer& a_roPrinter );
     };
 }
 

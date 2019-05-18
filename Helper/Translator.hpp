@@ -21,7 +21,7 @@ namespace helper {
         /// \param a_roLogger - const reference on iLogger to unable logging in class
         /// \param a_roFileManager - reference on iFileManager to unable use file with class.
         ///
-        explicit Translator( const iLogger &a_roLogger, iFileManager &a_roFileManager );
+        Translator( const iLogger &a_roLogger, iFileManager &a_roFileManager );
 
         ///
         /// \brief translateCommand - Make vector
@@ -43,7 +43,7 @@ namespace helper {
         /// \param a_rstrCommand - string with command from std::cin
         /// \return vector of command
         ///
-        std::vector<std::string> splitCommand(std::string &a_rstrCommand) const;
+        std::vector<std::string> splitCommand( std::string &a_rstrCommand ) const;
 
         ///
         /// \brief splitCommandByWord - used to split sequence splitCommand by command
@@ -56,7 +56,7 @@ namespace helper {
         /// \see splitCommand
         ///
         std::vector<std::vector<std::string> > splitCommandByWord
-                                                (const std::vector<std::string> &a_rstrCommandSequence ) const;
+                                                ( const std::vector<std::string> &a_rstrCommandSequence ) const;
 
         ///
         /// \brief takeParam - used to take param from first line in file
@@ -82,15 +82,15 @@ namespace helper {
         /// \param a_rstrToSplit - a line from file to split by expected column
         /// \return string with expected param to print
         ///
-        std::string splitByExpectedField(const std::vector<uint16_t> &a_rau16Line, const std::string &a_rstrToSplit);
+        std::string splitByExpectedField( const std::vector<uint16_t> &a_rau16Line, const std::string &a_rstrToSplit );
 
     private:
         const iLogger &m_roLogger;
         iFileManager &m_roFileManager;
 
-        explicit Translator();
-        explicit Translator( const Translator& );
-        Translator& operator=( const Translator& Translator );
+        Translator();
+        explicit Translator( const Translator& a_roTranslator );
+        Translator& operator=( const Translator& a_roTranslator );
 
         utils::dbCommand checkFirstWord( const std::string &a_rstrWord ) const;
         size_t splitByDelimeter(
@@ -101,7 +101,7 @@ namespace helper {
         std::vector<std::string> makeParamCreate( const std::string &a_rstrWord ) const;
         std::vector<std::string> makeParamInsert( const std::string &a_rstrWord ) const;
         std::string makeParamWhere( const std::string &a_strWord ) const;
-        std::string splitByExpectedField(const std::vector<uint16_t> &a_rau16Line);
+        std::string splitByExpectedField( const std::vector<uint16_t> &a_rau16Line );
     };
 }
 

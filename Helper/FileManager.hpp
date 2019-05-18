@@ -120,9 +120,9 @@ namespace helper
         std::fstream m_oFile;
         std::string m_strFileName;
         const std::string m_strFileExtension;
-        explicit FileManager();
-        explicit FileManager( const FileManager& );
-        FileManager& operator=( const FileManager& a_oFileManager );
+        FileManager();
+        explicit FileManager( const FileManager& a_roFileManager );
+        FileManager& operator=( const FileManager& a_roFileManager );
         bool isFileOpen();
         uint16_t countLine();
 

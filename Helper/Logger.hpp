@@ -35,10 +35,10 @@ namespace helper
         ///
         void logInfo( const std::string &a_rstrInfoMessage ) const;
     private:
-        explicit Logger();
+        Logger();
         virtual ~Logger();
-        explicit Logger( const Logger& );
-        Logger& operator=( const Logger& a_oLogger );
+        explicit Logger( const Logger& a_roLogger );
+        Logger& operator=( const Logger& a_roLogger );
 
 
     };

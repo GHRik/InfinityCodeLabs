@@ -39,7 +39,7 @@ private:
     iTranslator &m_roTranslator;
     const iPrinter &m_roPrinter;
     void callCommand(utils::CommandStandardize &a_roCommand  ) const;
-    explicit DatabaseManager();
+    DatabaseManager();
     explicit DatabaseManager( const DatabaseManager& );
     DatabaseManager& operator=( const DatabaseManager& a_oDatabaseManager );
 

@@ -19,7 +19,6 @@ namespace helper
     class Validator : public iValidate
     {
     public:
-
         ///
         /// \brief Validator
         /// \param a_roLogger - reference on iLogger to enable logging
@@ -89,9 +88,9 @@ namespace helper
         bool isVarcharValid( std::string &a_rstrWord , const uint16_t u16SizeOfVarchar ) const;
         void makeVectorUnique( std::vector<std::string> &a_rastrVector ) const;
 
-        explicit Validator();
-        explicit Validator( const Validator& );
-        Validator& operator=( const Validator& a_oValidate );
+        Validator();
+        explicit Validator( const Validator& a_roValidate );
+        Validator& operator=( const Validator& a_roValidate );
 
     };
 }

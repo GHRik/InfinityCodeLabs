@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-helper::Translator::Translator(const iLogger &a_roLogger , iFileManager &a_roFileManager)
+helper::Translator::Translator( const iLogger &a_roLogger , iFileManager &a_roFileManager )
     : m_roLogger( a_roLogger ),
       m_roFileManager( a_roFileManager )
 {
@@ -12,7 +12,7 @@ helper::Translator::Translator(const iLogger &a_roLogger , iFileManager &a_roFil
 }
 
 std::vector<utils::CommandStandardize> helper::Translator::translateCommand
-                                       ( const std::vector<std::vector<std::string>> &a_rastrComandsSplitByWord)
+                                       ( const std::vector<std::vector<std::string>> &a_rastrComandsSplitByWord )
 {
     utils::CommandStandardize oCommand = {};
     std::vector<utils::CommandStandardize> aoStandarizeCommand;
@@ -24,13 +24,13 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
     {
         astrCommandParam.clear();
         strTableName = "";
-        oDbCommand = checkFirstWord(a_rastrComandsSplitByWord.at(u16Iter).at(0));
+        oDbCommand = checkFirstWord( a_rastrComandsSplitByWord.at(u16Iter).at(0)) ;
         std::string strTempWord = "";
         switch( oDbCommand )
         {
             case utils::dbCommand::CREATE:
             {
-                if( 2 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) )
+                if( 2 > (a_rastrComandsSplitByWord.at(u16Iter).size()-1) ) //
                 {
                     astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Undefined table name");
