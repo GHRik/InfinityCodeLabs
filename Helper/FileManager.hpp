@@ -16,15 +16,15 @@ namespace helper
     class FileManager : public iFileManager
     {
     public:
-        FileManager( const iLogger &a_roLogger );
+        explicit FileManager( const iLogger &a_roLogger );
         ~FileManager();
     private:
         const iLogger &m_roLogger;
         std::fstream m_oFile;
         std::string m_strFileName;
         const std::string m_strFileExtension;
-        FileManager();
-        FileManager( const FileManager& );
+        explicit FileManager();
+        explicit FileManager( const FileManager& );
         FileManager& operator=( const FileManager& a_oFileManager );
         bool isFileOpen();
         uint16_t countLine();

@@ -22,7 +22,7 @@ struct CommandQueue;
 class DatabaseManager
 {
 public:
-    DatabaseManager
+    explicit DatabaseManager
     (
       const iLogger &a_roLogger,
       iValidate &a_roValidate,
@@ -39,8 +39,8 @@ private:
     iTranslator &m_roTranslator;
     const iPrinter &m_roPrinter;
     void callCommand(utils::CommandStandardize &a_roCommand  ) const;
-    DatabaseManager();
-    DatabaseManager( const DatabaseManager& );
+    explicit DatabaseManager();
+    explicit DatabaseManager( const DatabaseManager& );
     DatabaseManager& operator=( const DatabaseManager& a_oDatabaseManager );
 
 };

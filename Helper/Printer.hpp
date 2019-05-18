@@ -9,7 +9,7 @@ namespace helper
     class Printer : public iPrinter
     {
     public:
-        Printer();
+        explicit Printer();
         ~Printer();
 
         // iPrinter interface

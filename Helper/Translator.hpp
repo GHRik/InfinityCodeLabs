@@ -12,7 +12,7 @@ namespace helper {
     class Translator : public iTranslator
     {
     public:
-        Translator( const iLogger &a_roLogger, iFileManager &a_roFileManager );
+        explicit Translator( const iLogger &a_roLogger, iFileManager &a_roFileManager );
         std::vector<utils::CommandStandardize> translateCommand
         (const std::vector<std::vector<std::string> > &a_rastrComandsSplitByWord);
         std::vector<std::string> splitCommand(std::string &a_rstrCommand) const;
@@ -32,8 +32,8 @@ namespace helper {
         std::vector<std::string> makeParamCreate( const std::string &a_rstrWord ) const;
         std::vector<std::string> makeParamInsert( const std::string &a_rstrWord ) const;
         std::string makeParamWhere( const std::string &a_strWord ) const;
-        Translator();
-        Translator( const Translator& );
+        explicit Translator();
+        explicit Translator( const Translator& );
         Translator& operator=( const Translator& Translator );
 
         std::string splitByExpectedField(const std::vector<uint16_t> &a_rau16Line);

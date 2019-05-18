@@ -170,7 +170,6 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
                     {
                         if(  1 == a_roCommand.params.size() && "*" == a_roCommand.params.at(0)  )
                         {
-                            isFieldExist = true;
                             isParamGood = true;
                             au16FieldNumberToPrint.resize(astrMyField.size());
                             std::iota( au16FieldNumberToPrint.begin(),au16FieldNumberToPrint.end(),0 );

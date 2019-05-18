@@ -16,7 +16,7 @@ namespace helper
     class Validator : public iValidate
     {
     public:
-        Validator( const iLogger &a_roLogger );
+        explicit Validator( const iLogger &a_roLogger );
         utils::ErrorsCode validateCommand(std::string &a_rstrCommand ) const;
         void prepareToValidate(std::string &a_rstrCommand);
         bool isWithoutError( const std::vector<std::string> &a_rastrCommands ) const;
@@ -36,8 +36,8 @@ namespace helper
         bool isVarcharValid(std::string &a_rstrWord , const uint16_t sizeOfVarchar) const;
         void makeVectorUnique( std::vector<std::string> &a_rastrVector ) const;
 
-        Validator();
-        Validator( const Validator& );
+        explicit Validator();
+        explicit Validator( const Validator& );
         Validator& operator=( const Validator& a_oValidate );
 
     public:
