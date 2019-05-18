@@ -1,0 +1,113 @@
+\hypertarget{classhelper_1_1_logger}{}\section{helper\+::Logger Class Reference}
+\label{classhelper_1_1_logger}\index{helper::Logger@{helper::Logger}}
+
+
+The \mbox{\hyperlink{classhelper_1_1_logger}{Logger}} class is Singletoon. This class is used to log in any casy of error, warrning and info.  
+
+
+
+
+{\ttfamily \#include $<$Logger.\+hpp$>$}
+
+Inheritance diagram for helper\+::Logger\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhelper_1_1_logger}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classhelper_1_1_logger_aefbd6da65fd1a5326019ae5445bd0bc8}{log\+Error}} (const std\+::string \&a\+\_\+rstr\+Error\+Message) const
+\begin{DoxyCompactList}\small\item\em log\+Error -\/ loggin E\+R\+R\+OR\+: + a\+\_\+rstr\+Error\+Message \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhelper_1_1_logger_ad857ce17cf393ea70cdb824e322c90c0}{log\+Warrning}} (const std\+::string \&a\+\_\+rstr\+Warrning\+Message) const
+\begin{DoxyCompactList}\small\item\em log\+Warrning -\/ loggin W\+A\+R\+R\+N\+I\+NG\+: + a\+\_\+str\+Warrning\+Message \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhelper_1_1_logger_aa72f37ba4e8e56c1036e3ab70acc19c6}{log\+Info}} (const std\+::string \&a\+\_\+rstr\+Info\+Message) const
+\begin{DoxyCompactList}\small\item\em log\+Info -\/ loggin I\+N\+FO\+: + a\+\_\+str\+Info\+Message \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classhelper_1_1_logger}{Logger}} const  \& \mbox{\hyperlink{classhelper_1_1_logger_ad83c355f624e02e4b820cf5a9db1cf2d}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em get\+Instance -\/ used to take \mbox{\hyperlink{classhelper_1_1_logger}{Logger}} object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classhelper_1_1_logger}{Logger}} class is Singletoon. This class is used to log in any casy of error, warrning and info. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhelper_1_1_logger_ad83c355f624e02e4b820cf5a9db1cf2d}\label{classhelper_1_1_logger_ad83c355f624e02e4b820cf5a9db1cf2d}} 
+\index{helper::Logger@{helper::Logger}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!helper::Logger@{helper::Logger}}
+\subsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classhelper_1_1_logger}{helper\+::\+Logger}} \& helper\+::\+Logger\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+get\+Instance -\/ used to take \mbox{\hyperlink{classhelper_1_1_logger}{Logger}} object 
+
+\begin{DoxyReturn}{Returns}
+const reference on \mbox{\hyperlink{classhelper_1_1_logger}{Logger}} object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhelper_1_1_logger_aefbd6da65fd1a5326019ae5445bd0bc8}\label{classhelper_1_1_logger_aefbd6da65fd1a5326019ae5445bd0bc8}} 
+\index{helper::Logger@{helper::Logger}!logError@{logError}}
+\index{logError@{logError}!helper::Logger@{helper::Logger}}
+\subsubsection{\texorpdfstring{logError()}{logError()}}
+{\footnotesize\ttfamily void helper\+::\+Logger\+::log\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+Error\+Message }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+log\+Error -\/ loggin E\+R\+R\+OR\+: + a\+\_\+rstr\+Error\+Message 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+Error\+Message} & -\/ messege to log \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classi_logger}{i\+Logger}}.
+
+\mbox{\Hypertarget{classhelper_1_1_logger_aa72f37ba4e8e56c1036e3ab70acc19c6}\label{classhelper_1_1_logger_aa72f37ba4e8e56c1036e3ab70acc19c6}} 
+\index{helper::Logger@{helper::Logger}!logInfo@{logInfo}}
+\index{logInfo@{logInfo}!helper::Logger@{helper::Logger}}
+\subsubsection{\texorpdfstring{logInfo()}{logInfo()}}
+{\footnotesize\ttfamily void helper\+::\+Logger\+::log\+Info (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+Info\+Message }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+log\+Info -\/ loggin I\+N\+FO\+: + a\+\_\+str\+Info\+Message 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+str\+Info\+Message} & -\/ messege to log \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classi_logger}{i\+Logger}}.
+
+\mbox{\Hypertarget{classhelper_1_1_logger_ad857ce17cf393ea70cdb824e322c90c0}\label{classhelper_1_1_logger_ad857ce17cf393ea70cdb824e322c90c0}} 
+\index{helper::Logger@{helper::Logger}!logWarrning@{logWarrning}}
+\index{logWarrning@{logWarrning}!helper::Logger@{helper::Logger}}
+\subsubsection{\texorpdfstring{logWarrning()}{logWarrning()}}
+{\footnotesize\ttfamily void helper\+::\+Logger\+::log\+Warrning (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+Warrning\+Message }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+log\+Warrning -\/ loggin W\+A\+R\+R\+N\+I\+NG\+: + a\+\_\+str\+Warrning\+Message 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+str\+Warrning\+Message} & -\/ messege to log \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classi_logger}{i\+Logger}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Helper/Logger.\+hpp\item 
+Helper/Logger.\+cpp\end{DoxyCompactItemize}

@@ -4,6 +4,9 @@
 namespace utils
 {
 
+///
+/// \brief The DbFieldType enum - store all type which can by used in table
+///
     enum DbFieldType
     {  
         INTEGER,

@@ -1,0 +1,65 @@
+\hypertarget{_c_1_2_users_2_riki_2_documents_2_d_b__damian__panasiuk_2_helper_2_translator_8hpp-example}{}\section{C\+:/\+Users/\+Riki/\+Documents/\+D\+B\+\_\+\+Damian\+\_\+\+Panasiuk/\+Helper/\+Translator.\+hpp}
+split\+Command -\/ used to split sequence from std\+::cin by command
+
+std\+::string str\+Command = \char`\"{}\+First comand; Secound Command;\char`\"{} split\+Command( str\+Command  ).at(0) = First comand; split\+Command( str\+Command  ).at(1) = Secound Command;
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+Command} & -\/ string with command from std\+::cin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef TRANSLATOR\_HPP}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define TRANSLATOR\_HPP}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "Interface/iTranslator.hpp"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "Interface/iLogger.hpp"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "Interface/iFileManager.hpp"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "Utils/DataBaseCommand.hpp"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }helper \{}
+\DoxyCodeLine{    \textcolor{keyword}{class }Translator : \textcolor{keyword}{public} \mbox{\hyperlink{classi_translator}{iTranslator}}}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{    \textcolor{keyword}{public}:}
+\DoxyCodeLine{        \textcolor{keyword}{explicit} \mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}}( \textcolor{keyword}{const} \mbox{\hyperlink{classi_logger}{iLogger}} \&a\_roLogger, \mbox{\hyperlink{classi_file_manager}{iFileManager}} \&a\_roFileManager );}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::vector<utils::CommandStandardize> \mbox{\hyperlink{classhelper_1_1_translator_ad34c90b65d84e99b2cbf7188739f459d}{translateCommand}}}
+\DoxyCodeLine{                                            ( \textcolor{keyword}{const} std::vector<std::vector<std::string> > \&a\_rastrComandsSplitByWord );}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::vector<std::string> splitCommand(std::string \&a\_rstrCommand) \textcolor{keyword}{const};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::vector<std::vector<std::string> > \mbox{\hyperlink{classhelper_1_1_translator_a1c4dfb9ff8a0a6d9453d7670a551fb61}{splitCommandByWord}}}
+\DoxyCodeLine{                                                (\textcolor{keyword}{const} std::vector<std::string> \&a\_rstrCommandSequence ) \textcolor{keyword}{const};}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::vector<std::string> \mbox{\hyperlink{classhelper_1_1_translator_a10a9763f9cdb15732b6dc9f0bca7cc7b}{takeParam}}( );}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::vector<std::string> \mbox{\hyperlink{classhelper_1_1_translator_a87c4cdc109a5ab827e9b91364cb5266f}{takeField}}( );}
+\DoxyCodeLine{}
+\DoxyCodeLine{        std::string \mbox{\hyperlink{classhelper_1_1_translator_a4069ff26b6329f5c6a70ccbfe752f812}{splitByExpectedField}}(\textcolor{keyword}{const} std::vector<uint16\_t> \&a\_rau16Line, \textcolor{keyword}{const} std::string \&a\_rstrToSplit);}
+\DoxyCodeLine{    \textcolor{keyword}{private}:}
+\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{classi_logger}{iLogger}} \&m\_roLogger;}
+\DoxyCodeLine{        \mbox{\hyperlink{classi_file_manager}{iFileManager}} \&m\_roFileManager;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{explicit} \mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}}();}
+\DoxyCodeLine{        \textcolor{keyword}{explicit} \mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}}( \textcolor{keyword}{const} \mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}}\& );}
+\DoxyCodeLine{        \mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}}\& operator=( \textcolor{keyword}{const} \mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}}\& \mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}} );}
+\DoxyCodeLine{}
+\DoxyCodeLine{        utils::dbCommand checkFirstWord( \textcolor{keyword}{const} std::string \&a\_rstrWord ) \textcolor{keyword}{const};}
+\DoxyCodeLine{        \textcolor{keywordtype}{size\_t} splitByDelimeter(}
+\DoxyCodeLine{                                \textcolor{keyword}{const} std::string \&a\_strTextToSplit,}
+\DoxyCodeLine{                                std::vector<std::string> \&a\_rastrResult,}
+\DoxyCodeLine{                                \textcolor{keywordtype}{char} a\_chDelimeter}
+\DoxyCodeLine{                                );}
+\DoxyCodeLine{        std::vector<std::string> makeParamCreate( \textcolor{keyword}{const} std::string \&a\_rstrWord ) \textcolor{keyword}{const};}
+\DoxyCodeLine{        std::vector<std::string> makeParamInsert( \textcolor{keyword}{const} std::string \&a\_rstrWord ) \textcolor{keyword}{const};}
+\DoxyCodeLine{        std::string makeParamWhere( \textcolor{keyword}{const} std::string \&a\_strWord ) \textcolor{keyword}{const};}
+\DoxyCodeLine{        std::string \mbox{\hyperlink{classhelper_1_1_translator_a4069ff26b6329f5c6a70ccbfe752f812}{splitByExpectedField}}(\textcolor{keyword}{const} std::vector<uint16\_t> \&a\_rau16Line);}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif // TRANSLATOR\_HPP}}
+\end{DoxyCodeInclude}
+ 

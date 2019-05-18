@@ -558,7 +558,7 @@ bool helper::Validator::isInt( std::string &a_rstrWord) const
 
 }
 
-bool helper::Validator::isVarcharValid(std::string &a_rstrWord, const uint16_t sizeOfVarchar ) const
+bool helper::Validator::isVarcharValid(std::string &a_rstrWord, const uint16_t u16SizeOfVarchar ) const
 {
     bool isValid = true;
     if( '"' != *a_rstrWord.begin() || '"' != *(a_rstrWord.end()-1) )
@@ -572,7 +572,7 @@ bool helper::Validator::isVarcharValid(std::string &a_rstrWord, const uint16_t s
         strTemp = strTemp.substr(1,strTemp.length());
         strTemp = strTemp.substr(0,strTemp.length()-1);
 
-        if( strTemp.length() > sizeOfVarchar )
+        if( strTemp.length() > u16SizeOfVarchar )
         {
             const std::string strTempMessage = "Param is too long ";
             m_roLogger.logError(strTempMessage);

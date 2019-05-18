@@ -1,0 +1,308 @@
+\hypertarget{classhelper_1_1_file_manager}{}\section{helper\+::File\+Manager Class Reference}
+\label{classhelper_1_1_file_manager}\index{helper::FileManager@{helper::FileManager}}
+
+
+The \mbox{\hyperlink{classhelper_1_1_file_manager}{File\+Manager}} class is used to operate on file.  
+
+
+
+
+{\ttfamily \#include $<$File\+Manager.\+hpp$>$}
+
+Inheritance diagram for helper\+::File\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhelper_1_1_file_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhelper_1_1_file_manager_ad4d27bd875ae06a87736bd04cab9539b}{File\+Manager}} (const \mbox{\hyperlink{classi_logger}{i\+Logger}} \&a\+\_\+ro\+Logger)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classhelper_1_1_file_manager}{File\+Manager}} -\/ constructor. \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_ab36cf64cb374f9d4f72d7490c18f9891}{create}} (const std\+::string \&a\+\_\+rstr\+File\+Name)
+\begin{DoxyCompactList}\small\item\em create -\/ create file if is not exist, if exist F\+I\+L\+E\+\_\+\+E\+R\+R\+OR will be return. \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_a0b4bac7ff95be0bdad0b70987a25b63c}{open}} (const std\+::string \&a\+\_\+rstr\+File\+Name)
+\begin{DoxyCompactList}\small\item\em open -\/ open file if exist \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhelper_1_1_file_manager_ab6927c952a504e279d95d3cde569874c}\label{classhelper_1_1_file_manager_ab6927c952a504e279d95d3cde569874c}} 
+void \mbox{\hyperlink{classhelper_1_1_file_manager_ab6927c952a504e279d95d3cde569874c}{close\+File}} ()
+\begin{DoxyCompactList}\small\item\em close\+File -\/ close file whos was open last \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_aa1bc4e046b1975d24ac2b8d575792692}{delete\+File}} (const std\+::string \&a\+\_\+rstr\+File\+Name) const
+\begin{DoxyCompactList}\small\item\em delete\+File -\/ if file exist delete this file. \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_acfeabee081f241c4e8d5a6f181584762}{write}} (const std\+::string \&a\+\_\+rstr\+Word, const bool b\+New\+Line)
+\begin{DoxyCompactList}\small\item\em write \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classhelper_1_1_file_manager_ad68fd52b8f593f9e08046d1edd18c853}{is\+File\+Exist}} (const std\+::string \&a\+\_\+rstr\+File\+Name) const
+\begin{DoxyCompactList}\small\item\em is\+File\+Exist -\/ check existing file in project directory \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_a062addfd443a7b4092f8cab865d8de31}{read\+Line}} (std\+::string \&a\+\_\+rastr\+Words, const uint8\+\_\+t a\+\_\+u8\+Number\+Line)
+\begin{DoxyCompactList}\small\item\em read\+Line -\/ reads exactly one line with the given number and writes it to a\+\_\+rastr\+Words \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_a6b2ed7ad49524905359d08d5c95dc774}{delete\+Line}} (uint16\+\_\+t a\+\_\+u16\+Line\+Number)
+\begin{DoxyCompactList}\small\item\em delete\+Line -\/ delete exactly one line with the given number and writes it to a\+\_\+rastr\+Words \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classhelper_1_1_file_manager_acfae3833526e6306859612f5a1203960}{read\+All}} ()
+\begin{DoxyCompactList}\small\item\em read\+All -\/ read all line( without first ) from last opened file. \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_acc1e93732315d48528cb57d440ec4c25}{read\+Line}} (std\+::string \&a\+\_\+rastr\+Word)
+\begin{DoxyCompactList}\small\item\em read\+Line -\/ reads exactly one line and writes it to a\+\_\+rastr\+Words \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_file_manager_a2ff9bcaf3345c13cd7eedb53e3f9841c}{delete\+All\+Line}} (const std\+::string \&a\+\_\+rstr\+File\+Name)
+\begin{DoxyCompactList}\small\item\em delete\+All\+Line \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classhelper_1_1_file_manager}{File\+Manager}} class is used to operate on file. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhelper_1_1_file_manager_ad4d27bd875ae06a87736bd04cab9539b}\label{classhelper_1_1_file_manager_ad4d27bd875ae06a87736bd04cab9539b}} 
+\index{helper::FileManager@{helper::FileManager}!FileManager@{FileManager}}
+\index{FileManager@{FileManager}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{FileManager()}{FileManager()}}
+{\footnotesize\ttfamily helper\+::\+File\+Manager\+::\+File\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classi_logger}{i\+Logger}} \&}]{a\+\_\+ro\+Logger }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{classhelper_1_1_file_manager}{File\+Manager}} -\/ constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+ro\+Logger} & -\/ reference on \mbox{\hyperlink{classi_logger}{i\+Logger}} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhelper_1_1_file_manager_ab36cf64cb374f9d4f72d7490c18f9891}\label{classhelper_1_1_file_manager_ab36cf64cb374f9d4f72d7490c18f9891}} 
+\index{helper::FileManager@{helper::FileManager}!create@{create}}
+\index{create@{create}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::create (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+create -\/ create file if is not exist, if exist F\+I\+L\+E\+\_\+\+E\+R\+R\+OR will be return. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+File\+Name} & file name to create without extension. For example\+: if you want to create x.\+extension, x should be a parameter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error\+Code OK or F\+I\+L\+E\+\_\+\+E\+R\+R\+OR if is problem with create file (or file exist) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_a2ff9bcaf3345c13cd7eedb53e3f9841c}\label{classhelper_1_1_file_manager_a2ff9bcaf3345c13cd7eedb53e3f9841c}} 
+\index{helper::FileManager@{helper::FileManager}!deleteAllLine@{deleteAllLine}}
+\index{deleteAllLine@{deleteAllLine}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{deleteAllLine()}{deleteAllLine()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::delete\+All\+Line (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+delete\+All\+Line 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+File\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+same as delete\+File and open 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classhelper_1_1_file_manager_aa1bc4e046b1975d24ac2b8d575792692}{delete\+File}} 
+
+\mbox{\hyperlink{classhelper_1_1_file_manager_a0b4bac7ff95be0bdad0b70987a25b63c}{open}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_aa1bc4e046b1975d24ac2b8d575792692}\label{classhelper_1_1_file_manager_aa1bc4e046b1975d24ac2b8d575792692}} 
+\index{helper::FileManager@{helper::FileManager}!deleteFile@{deleteFile}}
+\index{deleteFile@{deleteFile}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{deleteFile()}{deleteFile()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::delete\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+File\+Name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+delete\+File -\/ if file exist delete this file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+File\+Name} & -\/ file name to delete without extension. For example\+: if you want to delete x.\+extension, x should be a parameter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error\+Code OK or F\+I\+L\+E\+\_\+\+E\+R\+R\+OR if is problem with delete file ( or file dont exist ) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_a6b2ed7ad49524905359d08d5c95dc774}\label{classhelper_1_1_file_manager_a6b2ed7ad49524905359d08d5c95dc774}} 
+\index{helper::FileManager@{helper::FileManager}!deleteLine@{deleteLine}}
+\index{deleteLine@{deleteLine}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{deleteLine()}{deleteLine()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::delete\+Line (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{a\+\_\+u16\+Line\+Number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+delete\+Line -\/ delete exactly one line with the given number and writes it to a\+\_\+rastr\+Words 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+u16\+Line\+Number} & -\/ line number to delete \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]This function now is empty. Function is neccesary to support D\+E\+L\+E\+TE F\+R\+OM table\+\_\+name W\+H\+E\+RE param=param. 
+
+To implements\+: Open\+File, Read\+All\+Line to string , delete line from string, insert string to temporary file, remove old file, rename temporary file as old file.\end{DoxyRefDesc}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_ad68fd52b8f593f9e08046d1edd18c853}\label{classhelper_1_1_file_manager_ad68fd52b8f593f9e08046d1edd18c853}} 
+\index{helper::FileManager@{helper::FileManager}!isFileExist@{isFileExist}}
+\index{isFileExist@{isFileExist}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{isFileExist()}{isFileExist()}}
+{\footnotesize\ttfamily bool helper\+::\+File\+Manager\+::is\+File\+Exist (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+File\+Name }\end{DoxyParamCaption}) const}
+
+
+
+is\+File\+Exist -\/ check existing file in project directory 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+File\+Name} & -\/ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if exist, false if not exist 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classhelper_1_1_file_manager_a0b4bac7ff95be0bdad0b70987a25b63c}\label{classhelper_1_1_file_manager_a0b4bac7ff95be0bdad0b70987a25b63c}} 
+\index{helper::FileManager@{helper::FileManager}!open@{open}}
+\index{open@{open}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::open (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+open -\/ open file if exist 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+File\+Name} & -\/ file name to open without extension. For example\+: if you want to open x.\+extension, x should be a parameter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error\+Code OK or F\+I\+L\+E\+\_\+\+E\+R\+R\+OR if is problem with open file ( or file dont exist ) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_acfae3833526e6306859612f5a1203960}\label{classhelper_1_1_file_manager_acfae3833526e6306859612f5a1203960}} 
+\index{helper::FileManager@{helper::FileManager}!readAll@{readAll}}
+\index{readAll@{readAll}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{readAll()}{readAll()}}
+{\footnotesize\ttfamily std\+::string helper\+::\+File\+Manager\+::read\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+read\+All -\/ read all line( without first ) from last opened file. 
+
+\begin{DoxyReturn}{Returns}
+string with file content 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_a062addfd443a7b4092f8cab865d8de31}\label{classhelper_1_1_file_manager_a062addfd443a7b4092f8cab865d8de31}} 
+\index{helper::FileManager@{helper::FileManager}!readLine@{readLine}}
+\index{readLine@{readLine}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{readLine()}{readLine()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::read\+Line (\begin{DoxyParamCaption}\item[{std\+::string \&}]{a\+\_\+rastr\+Words,  }\item[{const uint8\+\_\+t}]{a\+\_\+u8\+Number\+Line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+read\+Line -\/ reads exactly one line with the given number and writes it to a\+\_\+rastr\+Words 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rastr\+Words} & -\/ reference on string. This string will be contain a line from file \\
+\hline
+{\em a\+\_\+u8\+Number\+Line} & -\/ line number to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+same as open 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classhelper_1_1_file_manager_a0b4bac7ff95be0bdad0b70987a25b63c}{open}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_acc1e93732315d48528cb57d440ec4c25}\label{classhelper_1_1_file_manager_acc1e93732315d48528cb57d440ec4c25}} 
+\index{helper::FileManager@{helper::FileManager}!readLine@{readLine}}
+\index{readLine@{readLine}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{readLine()}{readLine()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::read\+Line (\begin{DoxyParamCaption}\item[{std\+::string \&}]{a\+\_\+rastr\+Word }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+read\+Line -\/ reads exactly one line and writes it to a\+\_\+rastr\+Words 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rastr\+Words} & -\/ reference on string. This string will be contain a line from file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+same as open 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classhelper_1_1_file_manager_a0b4bac7ff95be0bdad0b70987a25b63c}{open}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+\mbox{\Hypertarget{classhelper_1_1_file_manager_acfeabee081f241c4e8d5a6f181584762}\label{classhelper_1_1_file_manager_acfeabee081f241c4e8d5a6f181584762}} 
+\index{helper::FileManager@{helper::FileManager}!write@{write}}
+\index{write@{write}!helper::FileManager@{helper::FileManager}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+File\+Manager\+::write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+rstr\+Word,  }\item[{const bool}]{b\+New\+Line = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+write 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+Word} & \\
+\hline
+{\em b\+New\+Line} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+same as open 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classhelper_1_1_file_manager_a0b4bac7ff95be0bdad0b70987a25b63c}{open}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Helper/File\+Manager.\+hpp\item 
+Helper/File\+Manager.\+cpp\end{DoxyCompactItemize}

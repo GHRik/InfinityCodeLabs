@@ -1,0 +1,207 @@
+\hypertarget{classhelper_1_1_translator}{}\section{helper\+::Translator Class Reference}
+\label{classhelper_1_1_translator}\index{helper::Translator@{helper::Translator}}
+
+
+The \mbox{\hyperlink{classhelper_1_1_translator}{Translator}} class is used to parse string. Translate means, this class translate a string to Command\+Standarize. Class Can parse field name and param from string.  
+
+
+
+
+{\ttfamily \#include $<$Translator.\+hpp$>$}
+
+Inheritance diagram for helper\+::Translator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhelper_1_1_translator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}{Translator}} (const \mbox{\hyperlink{classi_logger}{i\+Logger}} \&a\+\_\+ro\+Logger, \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}} \&a\+\_\+ro\+File\+Manager)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classhelper_1_1_translator}{Translator}}. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structutils_1_1_command_standardize}{utils\+::\+Command\+Standardize}} $>$ \mbox{\hyperlink{classhelper_1_1_translator_ad34c90b65d84e99b2cbf7188739f459d}{translate\+Command}} (const std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&a\+\_\+rastr\+Comands\+Split\+By\+Word)
+\begin{DoxyCompactList}\small\item\em translate\+Command -\/ Make vector \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classhelper_1_1_translator_acc87c03c71d988bb0f6e95e1bff839c8}{split\+Command}} (std\+::string \&a\+\_\+rstr\+Command) const
+\begin{DoxyCompactList}\small\item\em split\+Command -\/ used to split sequence from std\+::cin by command \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{classhelper_1_1_translator_a1c4dfb9ff8a0a6d9453d7670a551fb61}{split\+Command\+By\+Word}} (const std\+::vector$<$ std\+::string $>$ \&a\+\_\+rstr\+Command\+Sequence) const
+\begin{DoxyCompactList}\small\item\em split\+Command\+By\+Word -\/ used to split sequence split\+Command by command \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classhelper_1_1_translator_a10a9763f9cdb15732b6dc9f0bca7cc7b}{take\+Param}} ()
+\begin{DoxyCompactList}\small\item\em take\+Param -\/ used to take param from first line in file \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classhelper_1_1_translator_a87c4cdc109a5ab827e9b91364cb5266f}{take\+Field}} ()
+\begin{DoxyCompactList}\small\item\em take\+Field -\/ used to take field name from first line in file \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classhelper_1_1_translator_a4069ff26b6329f5c6a70ccbfe752f812}{split\+By\+Expected\+Field}} (const std\+::vector$<$ uint16\+\_\+t $>$ \&a\+\_\+rau16\+Line, const std\+::string \&a\+\_\+rstr\+To\+Split)
+\begin{DoxyCompactList}\small\item\em split\+By\+Expected\+Field -\/ read file by expected column \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classhelper_1_1_translator}{Translator}} class is used to parse string. Translate means, this class translate a string to Command\+Standarize. Class Can parse field name and param from string. 
+
+\begin{DoxySeeAlso}{See also}
+Command\+Standarize 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}\label{classhelper_1_1_translator_a5a7565a5da4276aba028c587ee212913}} 
+\index{helper::Translator@{helper::Translator}!Translator@{Translator}}
+\index{Translator@{Translator}!helper::Translator@{helper::Translator}}
+\subsubsection{\texorpdfstring{Translator()}{Translator()}}
+{\footnotesize\ttfamily helper\+::\+Translator\+::\+Translator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classi_logger}{i\+Logger}} \&}]{a\+\_\+ro\+Logger,  }\item[{\mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}} \&}]{a\+\_\+ro\+File\+Manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{classhelper_1_1_translator}{Translator}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+ro\+Logger} & -\/ const reference on \mbox{\hyperlink{classi_logger}{i\+Logger}} to unable logging in class \\
+\hline
+{\em a\+\_\+ro\+File\+Manager} & -\/ reference on \mbox{\hyperlink{classi_file_manager}{i\+File\+Manager}} to unable use file with class. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhelper_1_1_translator_a4069ff26b6329f5c6a70ccbfe752f812}\label{classhelper_1_1_translator_a4069ff26b6329f5c6a70ccbfe752f812}} 
+\index{helper::Translator@{helper::Translator}!splitByExpectedField@{splitByExpectedField}}
+\index{splitByExpectedField@{splitByExpectedField}!helper::Translator@{helper::Translator}}
+\subsubsection{\texorpdfstring{splitByExpectedField()}{splitByExpectedField()}}
+{\footnotesize\ttfamily std\+::string helper\+::\+Translator\+::split\+By\+Expected\+Field (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint16\+\_\+t $>$ \&}]{a\+\_\+rau16\+Line,  }\item[{const std\+::string \&}]{a\+\_\+rstr\+To\+Split }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+split\+By\+Expected\+Field -\/ read file by expected column 
+
+Example\+: str\+From\+File = \char`\"{}1 2 3.\+5 \char`\"{}Test\char`\"{}\char`\"{} $<$-\/ string readed from file ~\newline
+ which\+Param = \{0,3\} $<$-\/ expected field to print ~\newline
+ split\+By\+Expected\+Field( which\+Param, str\+From\+File ) = \char`\"{}1 \char`\"{}Test\char`\"{}\char`\"{} $<$-\/ result
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rau16\+Line} & -\/ number of which column will be taken from file \\
+\hline
+{\em a\+\_\+rstr\+To\+Split} & -\/ a line from file to split by expected column \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string with expected param to print 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_translator}{i\+Translator}}.
+
+\mbox{\Hypertarget{classhelper_1_1_translator_acc87c03c71d988bb0f6e95e1bff839c8}\label{classhelper_1_1_translator_acc87c03c71d988bb0f6e95e1bff839c8}} 
+\index{helper::Translator@{helper::Translator}!splitCommand@{splitCommand}}
+\index{splitCommand@{splitCommand}!helper::Translator@{helper::Translator}}
+\subsubsection{\texorpdfstring{splitCommand()}{splitCommand()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ helper\+::\+Translator\+::split\+Command (\begin{DoxyParamCaption}\item[{std\+::string \&}]{a\+\_\+rstr\+Command }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+split\+Command -\/ used to split sequence from std\+::cin by command 
+
+Example\+: std\+::string str\+Command = \char`\"{}\+First comand; Secound Command;\char`\"{} ~\newline
+ split\+Command( str\+Command  ).at(0) = \char`\"{}\+First comand\char`\"{} ~\newline
+ split\+Command( str\+Command  ).at(1) = \char`\"{}\+Secound Command\char`\"{}
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+Command} & -\/ string with command from std\+::cin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of command 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_translator}{i\+Translator}}.
+
+\mbox{\Hypertarget{classhelper_1_1_translator_a1c4dfb9ff8a0a6d9453d7670a551fb61}\label{classhelper_1_1_translator_a1c4dfb9ff8a0a6d9453d7670a551fb61}} 
+\index{helper::Translator@{helper::Translator}!splitCommandByWord@{splitCommandByWord}}
+\index{splitCommandByWord@{splitCommandByWord}!helper::Translator@{helper::Translator}}
+\subsubsection{\texorpdfstring{splitCommandByWord()}{splitCommandByWord()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ helper\+::\+Translator\+::split\+Command\+By\+Word (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{a\+\_\+rstr\+Command\+Sequence }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+split\+Command\+By\+Word -\/ used to split sequence split\+Command by command 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+Command\+Sequence} & -\/ string with O\+NE command ready to be splited by word\\
+\hline
+\end{DoxyParams}
+Example\+: std\+::string str\+Sequence = \char`\"{}\+One command;\char`\"{} ~\newline
+ split\+Comand\+By\+Word( str\+Sequence ).at(0) = \char`\"{}\+One\char`\"{} ~\newline
+ split\+Comand\+By\+Word( str\+Sequence ).at(0) = \char`\"{}command\char`\"{} \begin{DoxyReturn}{Returns}
+vector of vector string. First diemension means a command number. Secound means a command splited by word( ready to translate to Command\+Standarize ) 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classhelper_1_1_translator_acc87c03c71d988bb0f6e95e1bff839c8}{split\+Command}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classi_translator}{i\+Translator}}.
+
+\mbox{\Hypertarget{classhelper_1_1_translator_a87c4cdc109a5ab827e9b91364cb5266f}\label{classhelper_1_1_translator_a87c4cdc109a5ab827e9b91364cb5266f}} 
+\index{helper::Translator@{helper::Translator}!takeField@{takeField}}
+\index{takeField@{takeField}!helper::Translator@{helper::Translator}}
+\subsubsection{\texorpdfstring{takeField()}{takeField()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ helper\+::\+Translator\+::take\+Field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+take\+Field -\/ used to take field name from first line in file 
+
+\begin{DoxyReturn}{Returns}
+vector of field name from table 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_translator}{i\+Translator}}.
+
+\mbox{\Hypertarget{classhelper_1_1_translator_a10a9763f9cdb15732b6dc9f0bca7cc7b}\label{classhelper_1_1_translator_a10a9763f9cdb15732b6dc9f0bca7cc7b}} 
+\index{helper::Translator@{helper::Translator}!takeParam@{takeParam}}
+\index{takeParam@{takeParam}!helper::Translator@{helper::Translator}}
+\subsubsection{\texorpdfstring{takeParam()}{takeParam()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ helper\+::\+Translator\+::take\+Param (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+take\+Param -\/ used to take param from first line in file 
+
+\begin{DoxyReturn}{Returns}
+vector of param from table 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_translator}{i\+Translator}}.
+
+\mbox{\Hypertarget{classhelper_1_1_translator_ad34c90b65d84e99b2cbf7188739f459d}\label{classhelper_1_1_translator_ad34c90b65d84e99b2cbf7188739f459d}} 
+\index{helper::Translator@{helper::Translator}!translateCommand@{translateCommand}}
+\index{translateCommand@{translateCommand}!helper::Translator@{helper::Translator}}
+\subsubsection{\texorpdfstring{translateCommand()}{translateCommand()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structutils_1_1_command_standardize}{utils\+::\+Command\+Standardize}} $>$ helper\+::\+Translator\+::translate\+Command (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&}]{a\+\_\+rastr\+Comands\+Split\+By\+Word }\end{DoxyParamCaption})}
+
+
+
+translate\+Command -\/ Make vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rastr\+Comands\+Split\+By\+Word} & -\/ vector of vector string. First diemension means a command number. Secound means a command splited by word( ready to translate to Command\+Standarize ) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector Command\+Standarize to properly call call\+Command 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+call\+Command 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Helper/Translator.\+hpp\item 
+Helper/Translator.\+cpp\end{DoxyCompactItemize}

@@ -27,7 +27,7 @@ void helper::Logger::logWarrning( const std::string &a_rstrWarrningMessage ) con
     std::cout <<"WARRNING: " << a_rstrWarrningMessage << std::endl;
 }
 
-void helper::Logger::logInfo(const std::string &a_rstrInfoMessage ) const
+void helper::Logger::logInfo( const std::string &a_rstrInfoMessage ) const
 {
     std::cout <<"INFO: " << a_rstrInfoMessage << std::endl;
 }

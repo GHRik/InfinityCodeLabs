@@ -665,7 +665,7 @@ std::string helper::Translator::splitByExpectedField(const std::vector<uint16_t>
     return strTemp;
 }
 
-//From https://stackoverflow.com/questions/5888022/split-string-by-single-spaces
+//Implementation from https://stackoverflow.com/questions/5888022/split-string-by-single-spaces
 size_t helper::Translator::splitByDelimeter(const std::string &a_strTextToSplit, std::vector<std::string> &a_rastrResult, char a_chDelimeter)
 {
     size_t pos = a_strTextToSplit.find( a_chDelimeter );

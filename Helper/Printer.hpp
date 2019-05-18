@@ -6,17 +6,24 @@
 
 namespace helper
 {
+///
+/// \brief The Printer class is used to print DataBase table a specific way
+///
     class Printer : public iPrinter
     {
     public:
         explicit Printer();
         ~Printer();
 
-        // iPrinter interface
-    public:
-        void printFields( const std::vector<std::string> a_astrFields) const;
-        void printRecord( const std::vector<std::string> a_astr) const;
+        ///
+        /// \brief printDataBase - print table from data base
+        /// \param a_rstrWord - data to print
+        ///
         void printDataBase( const std::string &a_rstrWord) const;
+
+    private:
+        explicit Printer( const Printer& );
+        Printer& operator=( const Printer& Translator );
     };
 }
 

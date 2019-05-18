@@ -1,0 +1,52 @@
+\hypertarget{structutils_1_1_command_standardize}{}\section{utils\+::Command\+Standardize Struct Reference}
+\label{structutils_1_1_command_standardize}\index{utils::CommandStandardize@{utils::CommandStandardize}}
+
+
+The \mbox{\hyperlink{structutils_1_1_command_standardize}{Command\+Standardize}} struct is used to change command from input on this standard.  
+
+
+
+
+{\ttfamily \#include $<$Data\+Base\+Command.\+hpp$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structutils_1_1_command_standardize_ad1b2f84d044e78fb682d427c050826be}\label{structutils_1_1_command_standardize_ad1b2f84d044e78fb682d427c050826be}} 
+utils\+::db\+Command \mbox{\hyperlink{structutils_1_1_command_standardize_ad1b2f84d044e78fb682d427c050826be}{command}}
+\begin{DoxyCompactList}\small\item\em command -\/ command to manage table from input \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structutils_1_1_command_standardize_a53778311e7c0704468cbe39d9cdd00d4}\label{structutils_1_1_command_standardize_a53778311e7c0704468cbe39d9cdd00d4}} 
+std\+::string \mbox{\hyperlink{structutils_1_1_command_standardize_a53778311e7c0704468cbe39d9cdd00d4}{table\+Name}}
+\begin{DoxyCompactList}\small\item\em table\+Name -\/ name of the table from input command \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{structutils_1_1_command_standardize_aac262dd521b08147d130def175b65c8d}{params}}
+\begin{DoxyCompactList}\small\item\em params -\/ for example field type and field name( in C\+R\+E\+A\+T\+E ) or value( in insert ), or W\+H\+E\+RE param = param \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{structutils_1_1_command_standardize}{Command\+Standardize}} struct is used to change command from input on this standard. 
+
+For example\+: str\+Input = \char`\"{}\+C\+R\+E\+A\+T\+E table (a\+:\+I\+N\+T\+E\+G\+E\+R);\char`\"{} ~\newline
+ in during program a Command\+Standarize will be stored\+: ~\newline
+ command = C\+R\+E\+A\+TE ~\newline
+ table\+Name = table ~\newline
+ param = \{ a,I\+N\+T\+E\+G\+ER \} 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structutils_1_1_command_standardize_aac262dd521b08147d130def175b65c8d}\label{structutils_1_1_command_standardize_aac262dd521b08147d130def175b65c8d}} 
+\index{utils::CommandStandardize@{utils::CommandStandardize}!params@{params}}
+\index{params@{params}!utils::CommandStandardize@{utils::CommandStandardize}}
+\subsubsection{\texorpdfstring{params}{params}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ utils\+::\+Command\+Standardize\+::params}
+
+
+
+params -\/ for example field type and field name( in C\+R\+E\+A\+T\+E ) or value( in insert ), or W\+H\+E\+RE param = param 
+
+\begin{DoxyWarning}{Warning}
+W\+H\+E\+RE param is stored as W\+H\+E\+R\+Eparam=param, but is not supported 
+\end{DoxyWarning}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Utils/Data\+Base\+Command.\+hpp\end{DoxyCompactItemize}

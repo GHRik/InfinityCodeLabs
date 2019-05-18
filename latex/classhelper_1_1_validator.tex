@@ -1,0 +1,203 @@
+\hypertarget{classhelper_1_1_validator}{}\section{helper\+::Validator Class Reference}
+\label{classhelper_1_1_validator}\index{helper::Validator@{helper::Validator}}
+
+
+The \mbox{\hyperlink{classhelper_1_1_validator}{Validator}} class is used to validate table name, param, field name etc.  
+
+
+
+
+{\ttfamily \#include $<$Validator.\+hpp$>$}
+
+Inheritance diagram for helper\+::Validator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classhelper_1_1_validator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhelper_1_1_validator_aa3ab86f79a0bf6c523bd5379661d58f6}{Validator}} (const \mbox{\hyperlink{classi_logger}{i\+Logger}} \&a\+\_\+ro\+Logger)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classhelper_1_1_validator}{Validator}}. \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_validator_aae6518da92c0aa1a982fc3a55ad520fa}{validate\+Command}} (std\+::string \&a\+\_\+rstr\+Command) const
+\begin{DoxyCompactList}\small\item\em validate\+Command -\/ checking ; " ( ) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classhelper_1_1_validator_a29502b3d7fcb861a37428adc53e4808d}{prepare\+To\+Validate}} (std\+::string \&a\+\_\+rstr\+Command)
+\begin{DoxyCompactList}\small\item\em prepare\+To\+Validate -\/ delete redundant space or other redundant sign \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classhelper_1_1_validator_a0d353649adaa559a8de7ad3f9ad56881}{is\+Without\+Error}} (const std\+::vector$<$ std\+::string $>$ \&a\+\_\+rastr\+Commands) const
+\begin{DoxyCompactList}\small\item\em is\+Without\+Error -\/ check if param dont have any E\+R\+R\+OR. \end{DoxyCompactList}\item 
+utils\+::\+Errors\+Code \mbox{\hyperlink{classhelper_1_1_validator_a1a1f708a239f9bcec685cee12fa5eb6d}{validate\+Standarize\+Command}} (\mbox{\hyperlink{structutils_1_1_command_standardize}{utils\+::\+Command\+Standardize}} \&a\+\_\+ro\+Command) const
+\begin{DoxyCompactList}\small\item\em validate\+Standarize\+Command -\/ check if all field in Command\+Standarize if valid like table\+Name, number of param, is param is valid etc. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classhelper_1_1_validator_ac2ff8db85b517ac2a1ccd4e20ec13889}{is\+Validate\+Param}} (std\+::string a\+\_\+str\+Param\+In\+Base, std\+::string \&a\+\_\+rstr\+Param\+In\+Command)
+\begin{DoxyCompactList}\small\item\em is\+Validate\+Param -\/ check if inserting param is same type as param from table. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classhelper_1_1_validator_ab0e104f0d9f8701af8b9b7980ea13ec4}{is\+Validate\+Field\+Name}} (const std\+::string \&a\+\_\+str\+Field\+Name\+Base, const std\+::string \&a\+\_\+str\+Name\+In\+Command)
+\begin{DoxyCompactList}\small\item\em is\+Validate\+Field\+Name -\/ checking if selected param from table can be selected \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classhelper_1_1_validator}{Validator}} class is used to validate table name, param, field name etc. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhelper_1_1_validator_aa3ab86f79a0bf6c523bd5379661d58f6}\label{classhelper_1_1_validator_aa3ab86f79a0bf6c523bd5379661d58f6}} 
+\index{helper::Validator@{helper::Validator}!Validator@{Validator}}
+\index{Validator@{Validator}!helper::Validator@{helper::Validator}}
+\subsubsection{\texorpdfstring{Validator()}{Validator()}}
+{\footnotesize\ttfamily helper\+::\+Validator\+::\+Validator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classi_logger}{i\+Logger}} \&}]{a\+\_\+ro\+Logger }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{classhelper_1_1_validator}{Validator}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+ro\+Logger} & -\/ reference on \mbox{\hyperlink{classi_logger}{i\+Logger}} to enable logging \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhelper_1_1_validator_ab0e104f0d9f8701af8b9b7980ea13ec4}\label{classhelper_1_1_validator_ab0e104f0d9f8701af8b9b7980ea13ec4}} 
+\index{helper::Validator@{helper::Validator}!isValidateFieldName@{isValidateFieldName}}
+\index{isValidateFieldName@{isValidateFieldName}!helper::Validator@{helper::Validator}}
+\subsubsection{\texorpdfstring{isValidateFieldName()}{isValidateFieldName()}}
+{\footnotesize\ttfamily bool helper\+::\+Validator\+::is\+Validate\+Field\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{a\+\_\+str\+Field\+Name\+Base,  }\item[{const std\+::string \&}]{a\+\_\+str\+Name\+In\+Command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+is\+Validate\+Field\+Name -\/ checking if selected param from table can be selected 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+str\+Field\+Name\+Base} & -\/ name in table \\
+\hline
+{\em a\+\_\+str\+Name\+In\+Command} & -\/ name who want be selected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if field name is valid 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_validate}{i\+Validate}}.
+
+\mbox{\Hypertarget{classhelper_1_1_validator_ac2ff8db85b517ac2a1ccd4e20ec13889}\label{classhelper_1_1_validator_ac2ff8db85b517ac2a1ccd4e20ec13889}} 
+\index{helper::Validator@{helper::Validator}!isValidateParam@{isValidateParam}}
+\index{isValidateParam@{isValidateParam}!helper::Validator@{helper::Validator}}
+\subsubsection{\texorpdfstring{isValidateParam()}{isValidateParam()}}
+{\footnotesize\ttfamily bool helper\+::\+Validator\+::is\+Validate\+Param (\begin{DoxyParamCaption}\item[{std\+::string}]{a\+\_\+str\+Param\+In\+Base,  }\item[{std\+::string \&}]{a\+\_\+rstr\+Param\+In\+Command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+is\+Validate\+Param -\/ check if inserting param is same type as param from table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+str\+Param\+In\+Base} & -\/ param read from table \\
+\hline
+{\em a\+\_\+rstr\+Param\+In\+Command} & -\/ param who want be insert in table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if param is valid 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_validate}{i\+Validate}}.
+
+\mbox{\Hypertarget{classhelper_1_1_validator_a0d353649adaa559a8de7ad3f9ad56881}\label{classhelper_1_1_validator_a0d353649adaa559a8de7ad3f9ad56881}} 
+\index{helper::Validator@{helper::Validator}!isWithoutError@{isWithoutError}}
+\index{isWithoutError@{isWithoutError}!helper::Validator@{helper::Validator}}
+\subsubsection{\texorpdfstring{isWithoutError()}{isWithoutError()}}
+{\footnotesize\ttfamily bool helper\+::\+Validator\+::is\+Without\+Error (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{a\+\_\+rastr\+Commands }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+is\+Without\+Error -\/ check if param dont have any E\+R\+R\+OR. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rastr\+Commands} & -\/ vector of command \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if is any E\+R\+R\+OR in vector 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classhelper_1_1_validator_aae6518da92c0aa1a982fc3a55ad520fa}{validate\+Command}} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classi_validate}{i\+Validate}}.
+
+\mbox{\Hypertarget{classhelper_1_1_validator_a29502b3d7fcb861a37428adc53e4808d}\label{classhelper_1_1_validator_a29502b3d7fcb861a37428adc53e4808d}} 
+\index{helper::Validator@{helper::Validator}!prepareToValidate@{prepareToValidate}}
+\index{prepareToValidate@{prepareToValidate}!helper::Validator@{helper::Validator}}
+\subsubsection{\texorpdfstring{prepareToValidate()}{prepareToValidate()}}
+{\footnotesize\ttfamily void helper\+::\+Validator\+::prepare\+To\+Validate (\begin{DoxyParamCaption}\item[{std\+::string \&}]{a\+\_\+rstr\+Command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+prepare\+To\+Validate -\/ delete redundant space or other redundant sign 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+Command} & -\/ entry command , out -\/ clear command without redundant sign \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classi_validate}{i\+Validate}}.
+
+\mbox{\Hypertarget{classhelper_1_1_validator_aae6518da92c0aa1a982fc3a55ad520fa}\label{classhelper_1_1_validator_aae6518da92c0aa1a982fc3a55ad520fa}} 
+\index{helper::Validator@{helper::Validator}!validateCommand@{validateCommand}}
+\index{validateCommand@{validateCommand}!helper::Validator@{helper::Validator}}
+\subsubsection{\texorpdfstring{validateCommand()}{validateCommand()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+Validator\+::validate\+Command (\begin{DoxyParamCaption}\item[{std\+::string \&}]{a\+\_\+rstr\+Command }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+validate\+Command -\/ checking ; " ( ) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+rstr\+Command} & -\/ if is problem with command , a\+\_\+rstr\+Command = \char`\"{}\+E\+R\+R\+O\+R\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error\+Code OK if command is valid 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classi_validate}{i\+Validate}}.
+
+\mbox{\Hypertarget{classhelper_1_1_validator_a1a1f708a239f9bcec685cee12fa5eb6d}\label{classhelper_1_1_validator_a1a1f708a239f9bcec685cee12fa5eb6d}} 
+\index{helper::Validator@{helper::Validator}!validateStandarizeCommand@{validateStandarizeCommand}}
+\index{validateStandarizeCommand@{validateStandarizeCommand}!helper::Validator@{helper::Validator}}
+\subsubsection{\texorpdfstring{validateStandarizeCommand()}{validateStandarizeCommand()}}
+{\footnotesize\ttfamily utils\+::\+Errors\+Code helper\+::\+Validator\+::validate\+Standarize\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structutils_1_1_command_standardize}{utils\+::\+Command\+Standardize}} \&}]{a\+\_\+ro\+Command }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+validate\+Standarize\+Command -\/ check if all field in Command\+Standarize if valid like table\+Name, number of param, is param is valid etc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+\_\+ro\+Command} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error\+Code OK if command is validate 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+Command\+Standardize 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classi_validate}{i\+Validate}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Helper/Validator.\+hpp\item 
+Helper/Validator.\+cpp\end{DoxyCompactItemize}
