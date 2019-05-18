@@ -26,7 +26,7 @@ DatabaseManager::~DatabaseManager()
 void DatabaseManager::run() const
 {
 
-    std::string commandsOneLine = "  SELECT 1 FROM BookInventory;  ";
+    std::string commandsOneLine = "  SELECT * FROM BookInventory;  ";
     //getline( std::cin, commandsOneLine );
     std::vector<std::vector<std::string>> astrComandInOneWord;
     std::vector<std::string> astrCommand;
@@ -82,7 +82,7 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
             break;
 
         case utils::dbCommand::DELETE_FROM :
-            m_roLogger.logInfo("DELETE FROM called");
+            m_roLogger.logWarrning("DELETE FROM called , but not supported");
             m_roLogger.logInfo("TableName: ");
             m_roLogger.logInfo(a_roCommand.tableName);
             m_roLogger.logInfo("Params: ");
@@ -163,26 +163,26 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
 
                     }
                     strTemp += '\n';
-                    strTemp += m_roFileManager.readAll();
+                    strTemp += m_roFileManager.readAll(); //SELECT *
                     m_roPrinter.printDataBase(strTemp);
 
                 }
                 else
                 {
-
-
                     if(  a_roCommand.params.size() <= astrMyField.size() )
                     {
                         bool isParamGood = true;
                         bool isFieldExist = false;
+                        std::vector<uint16_t> au16FieldNumberToPrint;
                         for( uint16_t u16It = 0; u16It < a_roCommand.params.size(); ++u16It )
                         {
                             for( uint16_t u16Iter = 0; u16Iter < astrMyField.size(); ++u16Iter )
                             {
                                 isFieldExist = false;
-                                if( m_roValidate.isValidateFieldName(a_roCommand.params.at(u16It),astrMyField.at(u16Iter) ) )
+                                if( true == m_roValidate.isValidateFieldName(a_roCommand.params.at(u16It),astrMyField.at(u16Iter) ) )
                                 {
                                     isFieldExist = true;
+                                    au16FieldNumberToPrint.push_back(u16Iter);
                                     break;
                                 }
                             }
@@ -195,7 +195,20 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
                         }
                         if( true == isParamGood )
                         {
+                            std::string strTemp = "";
+                            strTemp += a_roCommand.tableName +'\n';
+                            for( uint16_t u16Iter = 0; u16Iter < au16FieldNumberToPrint.size(); ++u16Iter  )
+                            {
+                                strTemp += astrMyField.at(au16FieldNumberToPrint.at(u16Iter)) + " ";
 
+                            }
+                            strTemp += '\n';
+                            std::string strLineFromFile = "";
+                            while( m_roFileManager.readLine(strLineFromFile) )
+                            {
+                                strTemp += m_roTranslator.splitByExpectedField( au16FieldNumberToPrint, strLineFromFile );
+                            }
+                            m_roPrinter.printDataBase(strTemp);
                         }
                     }
                     else
@@ -208,7 +221,7 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
             break;
 
         case utils::dbCommand::DROP :
-            m_roLogger.logInfo("DROP called");
+            m_roLogger.logWarrning("DROP called , but not supported");
             m_roLogger.logInfo("TableName: ");
             m_roLogger.logInfo(a_roCommand.tableName);
             m_roLogger.logInfo("Params: ");
@@ -216,7 +229,6 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
             {
                 m_roLogger.logInfo(a_roCommand.params.at(i));
             }
-            break;
 
         case utils::dbCommand::UNDEFINED :
             m_roLogger.logError("Undefined command");

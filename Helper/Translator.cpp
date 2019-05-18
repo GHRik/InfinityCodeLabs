@@ -637,6 +637,42 @@ std::vector<std::string> helper::Translator::takeField()
     return astrMyParams;
 }
 
+std::string helper::Translator::splitByExpectedField(const std::vector<uint16_t> &a_rau16Line, const std::string &a_rstrToSplit)
+{
+    std::string strTemp = "";
+    std::vector<std::string> astrTempVec;
+    bool isQuoteState = false;
+    for( uint16_t u16Iter = 0; u16Iter < a_rstrToSplit.length(); ++u16Iter )
+    {
+
+        if( a_rstrToSplit.at( u16Iter ) == '"' )
+        {
+            isQuoteState = !isQuoteState;
+        }
+        if( a_rstrToSplit.at( u16Iter ) == ' ' && false == isQuoteState )
+        {
+            if( 0 < strTemp.length() )
+            {
+                astrTempVec.push_back( strTemp );
+            }
+            strTemp = "";
+        }
+        else
+        {
+            strTemp += a_rstrToSplit.at( u16Iter );
+        }
+
+    }
+    strTemp = "";
+    for( uint16_t u16Iter = 0; u16Iter < a_rau16Line.size(); ++u16Iter )
+    {
+        strTemp += astrTempVec.at(a_rau16Line.at(u16Iter))+ " ";
+    }
+    strTemp += '\n';
+
+    return strTemp;
+}
+
 //From https://stackoverflow.com/questions/5888022/split-string-by-single-spaces
 size_t helper::Translator::splitByDelimeter(const std::string &a_strTextToSplit, std::vector<std::string> &a_rastrResult, char a_chDelimeter)
 {

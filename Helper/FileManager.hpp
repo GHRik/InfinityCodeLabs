@@ -40,6 +40,7 @@ namespace helper
         utils::ErrorsCode readLine(std::string &a_rastrWords , const uint8_t a_u8NumberLine);
         utils::ErrorsCode deleteLine(uint16_t a_u16LineNumber );
         std::string readAll();
+        utils::ErrorsCode readLine(std::string &a_rastrWord);
     };
 }
 

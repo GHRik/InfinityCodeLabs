@@ -19,6 +19,7 @@ namespace helper {
         std::vector<std::vector<std::string> > splitCommandByWord(const std::vector<std::string> &a_rstrCommandSequence) const;
         std::vector<std::string> takeParam( );
         std::vector<std::string> takeField( );
+        std::string splitByExpectedField(const std::vector<uint16_t> &a_rau16Line, const std::string &a_rstrToSplit);
     private:
         const iLogger &m_roLogger;
         iFileManager &m_roFileManager;
@@ -34,6 +35,8 @@ namespace helper {
         Translator();
         Translator( const Translator& );
         Translator& operator=( const Translator& Translator );
+
+        std::string splitByExpectedField(const std::vector<uint16_t> &a_rau16Line);
     };
 }
 

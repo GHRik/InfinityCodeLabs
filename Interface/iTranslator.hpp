@@ -17,6 +17,7 @@ public:
                                                   ( const std::vector<std::string> &a_rstrCommandSequence ) const = 0;
     virtual std::vector<std::string> takeParam() = 0;
     virtual std::vector<std::string> takeField() = 0;
+    virtual std::string splitByExpectedField( const std::vector<uint16_t> &a_rau16Line, const std::string &a_rstrToSplit ) = 0;
 
 };
 

@@ -231,3 +231,20 @@ std::string helper::FileManager::readAll()
     return strResult;
 
 }
+
+utils::ErrorsCode helper::FileManager::readLine(std::string &a_rastrWord)
+{
+    utils::ErrorsCode oError = utils::ErrorsCode::OK;
+    if( true == isFileOpen() )
+    {
+        if( getline( m_oFile,a_rastrWord ) )
+        {
+            oError = utils::ErrorsCode::EMPTY_STRING;
+        }
+    }
+    else
+    {
+        oError = utils::ErrorsCode::FILE_ERROR;
+    }
+    return oError;
+}

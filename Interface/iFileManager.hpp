@@ -13,6 +13,7 @@ public:
     virtual utils::ErrorsCode open( const std::string &a_rstrFileName ) = 0;
     virtual void closeFile() = 0;
     virtual utils::ErrorsCode readLine( std::string &a_rastrWord, const uint8_t a_u8NumberLine  ) = 0;
+    virtual utils::ErrorsCode readLine( std::string &a_rastrWord ) = 0;
     virtual std::string readAll() = 0;
     virtual utils::ErrorsCode deleteFile( const std::string &a_rstrFileName ) const = 0;
     virtual utils::ErrorsCode deleteLine( uint16_t a_u8LineNumber ) = 0;
