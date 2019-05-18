@@ -86,10 +86,19 @@ utils::ErrorsCode helper::FileManager::deleteFile( const std::string &a_rstrFile
 {
     utils::ErrorsCode oError = utils::ErrorsCode::OK;
 
-    if( remove( a_rstrFileName.c_str() ) != 0 )
+    std::string strTemp = a_rstrFileName+"."+m_strFileExtension;
+    if( true == isFileExist(strTemp) )
     {
-      oError = utils::ErrorsCode::FILE_ERROR;
-      m_roLogger.logError("Can not delete file");
+        if( remove( strTemp.c_str() ) != 0 )
+        {
+          oError = utils::ErrorsCode::FILE_ERROR;
+          m_roLogger.logError("Can not delete file");
+        }
+    }
+    else
+    {
+         oError = utils::ErrorsCode::FILE_ERROR;
+         m_roLogger.logError("Can not DROP table because dont exist");
     }
     return oError;
 }
@@ -221,12 +230,17 @@ std::string helper::FileManager::readAll()
 {
     std::string strResult = "";
     std::string strTemp = "";
-    getline( m_oFile, strTemp ); //skip first line
-    while(getline( m_oFile, strTemp ))
+    closeFile();
+    if( utils::ErrorsCode::OK == open( m_strFileName ) )
     {
-        strResult += strTemp;
-        strResult += '\n';
+        getline( m_oFile, strTemp ); //skip first line
+        while(getline( m_oFile, strTemp ))
+        {
+            strResult += strTemp;
+            strResult += '\n';
+        }
     }
+
 
     return strResult;
 

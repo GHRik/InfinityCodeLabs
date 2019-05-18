@@ -26,7 +26,7 @@ DatabaseManager::~DatabaseManager()
 void DatabaseManager::run() const
 {
 
-    std::string commandsOneLine = "  SELECT * FROM BookInventory;  ";
+    std::string commandsOneLine = "INSERT INTO BookInventory ( \"60\", 1 , 2.5, true ) ; INSERT INTO BookInventory ( \"60\", 1 , 2.5, true ) ; INSERT INTO BookInventory ( \"60\", 1 , 2.5, true ) ; SELECT * FROM BookInventory;  ";
     //getline( std::cin, commandsOneLine );
     std::vector<std::vector<std::string>> astrComandInOneWord;
     std::vector<std::string> astrCommand;
@@ -93,6 +93,7 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
             break;
 
         case utils::dbCommand::INSERT_INTO :
+            m_roFileManager.closeFile();
             if( utils::ErrorsCode::OK == ( m_roFileManager.open( a_roCommand.tableName ) ) )
             {
                 std::vector<std::string> astrMyParams = m_roTranslator.takeParam();
@@ -136,7 +137,7 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
                     m_roLogger.logError("Incompatible number of arguments");
                 }
             }
-
+            m_roFileManager.closeFile();
 
             break;
 
@@ -163,6 +164,7 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
 
                     }
                     strTemp += '\n';
+                    m_roFileManager.closeFile();
                     strTemp += m_roFileManager.readAll(); //SELECT *
                     m_roPrinter.printDataBase(strTemp);
 
@@ -208,7 +210,8 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
                             {
                                 strTemp += m_roTranslator.splitByExpectedField( au16FieldNumberToPrint, strLineFromFile );
                             }
-                            m_roPrinter.printDataBase(strTemp);
+
+                            m_roPrinter.printDataBase(strTemp); //SELECT param,parm
                         }
                     }
                     else
@@ -217,19 +220,18 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
                     }
                 }
             }
-
+            m_roFileManager.closeFile();
             break;
 
         case utils::dbCommand::DROP :
-            m_roLogger.logWarrning("DROP called , but not supported");
-            m_roLogger.logInfo("TableName: ");
-            m_roLogger.logInfo(a_roCommand.tableName);
-            m_roLogger.logInfo("Params: ");
-            for(size_t i = 0; i < a_roCommand.params.size();++i)
-            {
-                m_roLogger.logInfo(a_roCommand.params.at(i));
-            }
+//            m_roLogger.logWarrning("DROP called , but not supported");
+//            m_roLogger.logInfo("TableName: ");
+//            m_roLogger.logInfo(a_roCommand.tableName);
+//            m_roLogger.logInfo("Params: ");
 
+
+             m_roFileManager.deleteFile( a_roCommand.tableName );
+        break;
         case utils::dbCommand::UNDEFINED :
             m_roLogger.logError("Undefined command");
             break;

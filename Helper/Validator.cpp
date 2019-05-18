@@ -153,10 +153,16 @@ utils::ErrorsCode helper::Validator::validateStandarizeCommand( utils::CommandSt
         if( 0 == a_roCommand.params.size() )
         {
             oError = utils::ErrorsCode::BAD_COMMAND;
+            m_roLogger.logError("INSER call without param");
         }
         break;
 
     case utils::dbCommand::DROP:
+        if( 0 != a_roCommand.params.size() )
+        {
+            oError = utils::ErrorsCode::BAD_COMMAND;
+            m_roLogger.logError("Unecessary param in DROP");
+        }
 
         break;
 
