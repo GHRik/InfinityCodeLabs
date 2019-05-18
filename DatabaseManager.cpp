@@ -26,8 +26,8 @@ DatabaseManager::~DatabaseManager()
 void DatabaseManager::run() const
 {
 
-    std::string commandsOneLine = "INSERT INTO BookInventory ( \"60\", 1 , 2.5, true ) ; INSERT INTO BookInventory ( \"60\", 1 , 2.5, true ) ; INSERT INTO BookInventory ( \"60\", 1 , 2.5, true ) ; SELECT * FROM BookInventory;  ";
-    //getline( std::cin, commandsOneLine );
+    std::string commandsOneLine = "" ;//"CREATE BookInventory ( Title:varchar(60),Price:Float,Amount:Integer,isAv:Bool ); INSERT INTO BookInventory ( \"60\", 2.5 , 2 , true ) ; SELECT * FROM BookInventory; DROP BookInventory;  ";
+    getline( std::cin, commandsOneLine );
     std::vector<std::vector<std::string>> astrComandInOneWord;
     std::vector<std::string> astrCommand;
     astrCommand = m_roTranslator.splitCommand(commandsOneLine);
@@ -37,7 +37,7 @@ void DatabaseManager::run() const
     }
     for( uint16_t u16Iter = 0; u16Iter < astrCommand.size(); ++u16Iter )
     {
-        std::cout << astrCommand.at( u16Iter ) << std::endl;
+        //std::cout << astrCommand.at( u16Iter ) << std::endl;
         if( utils::ErrorsCode::OK != m_roValidate.validateCommand( astrCommand.at( u16Iter )) )
         {
             astrCommand.erase( astrCommand.begin() + u16Iter );
@@ -58,6 +58,7 @@ void DatabaseManager::run() const
 
     for( uint16_t u16Iter = 0; u16Iter < aoCommandStandard.size(); ++u16Iter )
     {
+        std::cout << astrCommand.at( u16Iter ) << std::endl;
         callCommand( aoCommandStandard.at( u16Iter) );
     }
 }
@@ -89,6 +90,11 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
             for(size_t i = 0; i < a_roCommand.params.size();++i)
             {
                 m_roLogger.logInfo(a_roCommand.params.at(i));
+                if( std::string::npos != a_roCommand.params.at(i).find("WHERE"))
+                {
+                    m_roLogger.logInfo("DELETE call with WHERE but not supported");
+                    break;
+                }
             }
             break;
 
@@ -142,96 +148,82 @@ void DatabaseManager::callCommand( utils::CommandStandardize &a_roCommand ) cons
             break;
 
         case utils::dbCommand::SELECT :
-            m_roLogger.logInfo("SELECT called");
-            m_roLogger.logInfo("TableName: ");
-            m_roLogger.logInfo(a_roCommand.tableName);
-            m_roLogger.logInfo("Params: ");
             for(size_t i = 0; i < a_roCommand.params.size();++i)
             {
-                m_roLogger.logInfo(a_roCommand.params.at(i));
+                if( std::string::npos != a_roCommand.params.at(i).find("WHERE"))
+                {
+                    m_roLogger.logInfo("SELECT call with WHERE but not supported");
+                    break;
+                }
             }
 
             if( utils::ErrorsCode::OK == ( m_roFileManager.open( a_roCommand.tableName ) ) )
             {
                 std::vector<std::string> astrMyField = m_roTranslator.takeField();
-                if( "*" == a_roCommand.params.at(0) && 1 == a_roCommand.params.size() )
+                if(  a_roCommand.params.size() <= astrMyField.size() )
                 {
-                    std::string strTemp = "";
-                    strTemp += a_roCommand.tableName +'\n';
-                    for( uint16_t u16Iter = 0; u16Iter < astrMyField.size(); ++u16Iter  )
+                    bool isParamGood = true;
+                    bool isFieldExist = false;
+                    std::vector<uint16_t> au16FieldNumberToPrint;
+                    for( uint16_t u16It = 0; u16It < a_roCommand.params.size(); ++u16It )
                     {
-                        strTemp += astrMyField.at(u16Iter) + " ";
-
-                    }
-                    strTemp += '\n';
-                    m_roFileManager.closeFile();
-                    strTemp += m_roFileManager.readAll(); //SELECT *
-                    m_roPrinter.printDataBase(strTemp);
-
-                }
-                else
-                {
-                    if(  a_roCommand.params.size() <= astrMyField.size() )
-                    {
-                        bool isParamGood = true;
-                        bool isFieldExist = false;
-                        std::vector<uint16_t> au16FieldNumberToPrint;
-                        for( uint16_t u16It = 0; u16It < a_roCommand.params.size(); ++u16It )
+                        if(  1 == a_roCommand.params.size() && "*" == a_roCommand.params.at(0)  )
                         {
-                            for( uint16_t u16Iter = 0; u16Iter < astrMyField.size(); ++u16Iter )
+                            isFieldExist = true;
+                            isParamGood = true;
+                            au16FieldNumberToPrint.resize(astrMyField.size());
+                            std::iota( au16FieldNumberToPrint.begin(),au16FieldNumberToPrint.end(),0 );
+                            break;
+                        }
+
+                        for( uint16_t u16Iter = 0; u16Iter < astrMyField.size(); ++u16Iter )
+                        {
+                            isFieldExist = false;
+                            if( true == m_roValidate.isValidateFieldName(a_roCommand.params.at(u16It),astrMyField.at(u16Iter) ) )
                             {
-                                isFieldExist = false;
-                                if( true == m_roValidate.isValidateFieldName(a_roCommand.params.at(u16It),astrMyField.at(u16Iter) ) )
-                                {
-                                    isFieldExist = true;
-                                    au16FieldNumberToPrint.push_back(u16Iter);
-                                    break;
-                                }
-                            }
-                            if( false == isFieldExist )
-                            {
-                                m_roLogger.logError( " Use param in SELECT is not field name " );
-                                isParamGood = false;
+                                isFieldExist = true;
+                                au16FieldNumberToPrint.push_back(u16Iter);
                                 break;
                             }
                         }
-                        if( true == isParamGood )
+                        if( false == isFieldExist )
                         {
-                            std::string strTemp = "";
-                            strTemp += a_roCommand.tableName +'\n';
-                            for( uint16_t u16Iter = 0; u16Iter < au16FieldNumberToPrint.size(); ++u16Iter  )
-                            {
-                                strTemp += astrMyField.at(au16FieldNumberToPrint.at(u16Iter)) + " ";
-
-                            }
-                            strTemp += '\n';
-                            std::string strLineFromFile = "";
-                            while( m_roFileManager.readLine(strLineFromFile) )
-                            {
-                                strTemp += m_roTranslator.splitByExpectedField( au16FieldNumberToPrint, strLineFromFile );
-                            }
-
-                            m_roPrinter.printDataBase(strTemp); //SELECT param,parm
+                            m_roLogger.logError( " Use param in SELECT is not field name " );
+                            isParamGood = false;
+                            break;
                         }
                     }
-                    else
+                    if( true == isParamGood )
                     {
-                        m_roLogger.logError("Too much arguments");
+                        std::string strTemp = "";
+                        strTemp += a_roCommand.tableName +'\n';
+                        for( uint16_t u16Iter = 0; u16Iter < au16FieldNumberToPrint.size(); ++u16Iter  )
+                        {
+                            strTemp += astrMyField.at(au16FieldNumberToPrint.at(u16Iter)) + " ";
+                            strTemp += '\t';
+
+                        }
+                        strTemp += '\n';
+                        std::string strLineFromFile = "";
+                        while( m_roFileManager.readLine(strLineFromFile) )
+                        {
+                            strTemp += m_roTranslator.splitByExpectedField( au16FieldNumberToPrint, strLineFromFile );
+                        }
+
+                        m_roPrinter.printDataBase(strTemp); //SELECT param,parm
                     }
+                }
+                else
+                {
+                    m_roLogger.logError("Too much arguments");
                 }
             }
             m_roFileManager.closeFile();
             break;
 
         case utils::dbCommand::DROP :
-//            m_roLogger.logWarrning("DROP called , but not supported");
-//            m_roLogger.logInfo("TableName: ");
-//            m_roLogger.logInfo(a_roCommand.tableName);
-//            m_roLogger.logInfo("Params: ");
-
-
-             m_roFileManager.deleteFile( a_roCommand.tableName );
-        break;
+            m_roFileManager.deleteFile( a_roCommand.tableName );
+            break;
         case utils::dbCommand::UNDEFINED :
             m_roLogger.logError("Undefined command");
             break;

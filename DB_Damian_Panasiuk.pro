@@ -1,6 +1,8 @@
 TEMPLATE = app
-CONFIG += console c++11
-CONFIG -= app_bundle Wall
+CONFIG += console
+CONFIG += c++11
+CONFIG -= app_bundle
+CONFIG -= Wall
 CONFIG -= qt
 
 SOURCES += \

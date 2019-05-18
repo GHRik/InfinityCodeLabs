@@ -18,5 +18,8 @@ int main()
     helper::Translator oTranslator( helper::Logger::getInstance(), oFileManager );
     const helper::Printer oPrinter;
     DatabaseManager dbManager( helper::Logger::getInstance(), oValidator, oFileManager, oTranslator, oPrinter );
-    dbManager.run();
+    while( 1 )
+    {
+        dbManager.run();
+    }
 }

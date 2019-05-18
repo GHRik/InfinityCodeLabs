@@ -14,6 +14,8 @@
 #include "Interface/iPrinter.hpp"
 #include <iostream>
 #include <vector>
+#include <numeric>
+#include <algorithm>
 
 struct CommandQueue;
 

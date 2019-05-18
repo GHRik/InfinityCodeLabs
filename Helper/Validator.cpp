@@ -446,6 +446,7 @@ bool helper::Validator::isValidateFieldName(const std::string &a_strFieldNameBas
     {
         isValide = true;
     }
+
     return isValide;
 }
 

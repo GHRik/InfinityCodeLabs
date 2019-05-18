@@ -34,6 +34,7 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
                 {
                     astrCommandParam.push_back("ERROR");
                     m_roLogger.logError("Undefined table name");
+                    m_roLogger.logInfo("Maybe you miss space after table name?");
                     continue;
                 }
                 else
@@ -55,7 +56,7 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
                 if( strTemp.length()-2 == strTempWord.length() )
                 {
 
-                    std::cout << strTempWord << std::endl;
+                    //std::cout << strTempWord << std::endl;
                     astrCommandParam = makeParamCreate(strTempWord);
                 }
                 else
@@ -99,7 +100,7 @@ std::vector<utils::CommandStandardize> helper::Translator::translateCommand
                         strTempWord = strTempWord.substr(0,strTempWord.length()-1);
                     }
 
-                    std::cout << strTempWord << std::endl;
+                    //std::cout << strTempWord << std::endl;
                     astrCommandParam = makeParamInsert(strTempWord);
 
                 }
@@ -666,7 +667,7 @@ std::string helper::Translator::splitByExpectedField(const std::vector<uint16_t>
     strTemp = "";
     for( uint16_t u16Iter = 0; u16Iter < a_rau16Line.size(); ++u16Iter )
     {
-        strTemp += astrTempVec.at(a_rau16Line.at(u16Iter))+ " ";
+        strTemp += astrTempVec.at(a_rau16Line.at(u16Iter))+ '\t';
     }
     strTemp += '\n';
 
